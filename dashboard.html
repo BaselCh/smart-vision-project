@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTVISION - Plataforma de Inteligência de Vendas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        smart: {
+                            blue: '#0066ff',
+                            purple: '#7c3aed',
+                            pink: '#ec4899',
+                            cyan: '#06b6d4',
+                            emerald: '#059669',
+                            amber: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        /* SMARTVISION Light Brand Hero Mesh Gradient */
+        .smart-hero-mesh {
+            background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 45%, #fdf2f8 100%);
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 15px 35px -10px rgba(37, 99, 235, 0.08), 0 5px 15px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ambient Brand Spheres (Blue, Purple, Pink, Cyan) */
+        .ambient-sphere-blue {
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.18) 0%, rgba(0, 102, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .ambient-sphere-purple {
+            position: absolute;
+            bottom: -60px;
+            right: 20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .ambient-sphere-pink {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(236, 72, 153, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Next-Gen Glass Panel */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1.5px solid #e2e8f0;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+            transition: all 0.25s ease;
+        }
+        .glass-card:hover {
+            border-color: #2563eb;
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Floating Nav HUD */
+        .floating-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1.5px solid #e2e8f0;
+            box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Interactive Hover Dropdown Submenus */
+        .nav-item-group {
+            position: relative;
+        }
+        .nav-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.5rem;
+            width: 270px;
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 1.25rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+            padding: 0.5rem 0;
+            z-index: 100;
+            animation: fadeInDown 0.2s ease;
+        }
+        .nav-item-group:hover .nav-dropdown-menu {
+            display: block;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Left Dock Item Active State */
+        .dock-item-active {
+            background: #eff6ff !important;
+            border-color: #2563eb !important;
+            color: #1d4ed8 !important;
+            font-weight: 900 !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-900 pb-20">
+
+    <!-- FLOATING HUD NAVIGATION BAR -->
+    <header class="sticky top-4 z-50 max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="floating-nav rounded-2xl px-6 py-3 flex items-center justify-between">
+            
+            <!-- Left: Official SMARTVISION Logo & Client Switcher -->
+            <div class="flex items-center gap-5">
+                <a href="#" class="flex items-center">
+                    <img src="assets/smartvision_logo_horizontal.png" alt="SMARTVISION - SEE SMART, GROW FURTHER" class="h-8 w-auto object-contain">
+                </a>
+
+                <div class="hidden sm:block w-px h-6 bg-slate-300"></div>
+
+                <!-- Client Selector Dropdown -->
+                <div class="relative">
+                    <button id="clientDropdownBtn" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs font-black text-blue-800 hover:bg-blue-100 transition-colors">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span id="currentClientName">CHLEBA</span>
+                        <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-blue-700"></i>
+                    </button>
+                    <!-- Client List Dropdown -->
+                    <div id="clientDropdownMenu" class="hidden absolute top-full left-0 mt-2 w-52 rounded-2xl bg-white shadow-2xl border-2 border-slate-300 py-2 z-50">
+                        <div class="px-3 py-1 text-[10px] font-black text-slate-500 uppercase">Selecionar Cliente</div>
+                        <button onclick="selectClient('CHLEBA')" class="w-full text-left px-3 py-2 text-xs font-black text-blue-700 bg-blue-50 flex items-center justify-between">
+                            CHLEBA <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                        </button>
+                        <button onclick="selectClient('ADDSUITE')" class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100">ADDSUITE</button>
+                        <button onclick="selectClient('PLAENGE')" class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100">PLAENGE</button>
+                        <button onclick="selectClient('MACKENZIE')" class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100">MACKENZIE</button>
+                        <button onclick="selectClient('SEB')" class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100">SEB</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Nav Links with WORKING MOUSE HOVER DROPDOWNS -->
+            <nav class="hidden md:flex items-center gap-6 text-xs font-extrabold text-slate-800">
+                
+                <!-- 1. Dashboards Hover Dropdown -->
+                <div class="nav-item-group py-2 cursor-pointer">
+                    <span class="text-blue-700 font-black flex items-center gap-1.5 bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-200 hover:bg-blue-100 transition-all">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4 text-blue-600"></i> Dashboards <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-blue-700"></i>
+                    </span>
+                    <div class="nav-dropdown-menu">
+                        <div class="px-4 py-1.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Dashboards Comerciais</div>
+                        <a href="#canvas" onclick="loadModuleView('Visão Geral', 1)" class="flex items-center gap-2.5 px-4 py-2.5 text-blue-700 font-black bg-blue-50">
+                            <i data-lucide="pie-chart" class="w-4 h-4 text-blue-600"></i> Visão Geral & Performance
+                        </a>
+                        <a href="#canvas" onclick="loadModuleView('Funil de Vendas', 13)" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
+                            <i data-lucide="filter-x" class="w-4 h-4 text-purple-600"></i> Funil de Vendas Completo
+                        </a>
+                        <a href="#canvas" onclick="loadModuleView('Google Ads', 7)" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
+                            <i data-lucide="target" class="w-4 h-4 text-red-600"></i> Performance Mídia Ads
+                        </a>
+                        <div class="my-1 border-t border-slate-200"></div>
+                        <a href="#" onclick="openReportViewer('Histórico Tableau')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-700 font-bold hover:bg-slate-100">
+                            <i data-lucide="history" class="w-4 h-4 text-slate-500"></i> Histórico de Dashboards
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Cubos de dados Hover Dropdown -->
+                <div class="nav-item-group py-2 cursor-pointer">
+                    <span class="hover:text-blue-700 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-slate-100">
+                        <i data-lucide="database" class="w-4 h-4 text-slate-600"></i> Cubos de dados <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
+                    </span>
+                    <div class="nav-dropdown-menu">
+                        <div class="px-4 py-1.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Exportação & Dados</div>
+                        <a href="#" onclick="alert('Iniciando download do cubo em Excel/CSV...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
+                            <i data-lucide="download" class="w-4 h-4 text-emerald-600"></i> Download de Cubos (Excel/CSV)
+                        </a>
+                        <a href="#" onclick="alert('Abrindo gerador de cubo customizado...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
+                            <i data-lucide="cpu" class="w-4 h-4 text-purple-600"></i> Gerar Novo Cubo de Dados
+                        </a>
+                        <a href="#" onclick="alert('Status da conexão Tableau Data Engine: Live')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
+                            <i data-lucide="refresh-cw" class="w-4 h-4 text-blue-600"></i> Conectar Tableau Live Engine
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Configurações Hover Dropdown -->
+                <div class="nav-item-group py-2 cursor-pointer">
+                    <span class="hover:text-blue-700 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-slate-100">
+                        <i data-lucide="settings" class="w-4 h-4 text-slate-600"></i> Configurações <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
+                    </span>
+                    <div class="nav-dropdown-menu w-72">
+                        <div class="px-4 py-1.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Configurações Manuais</div>
+                        <a href="#" onclick="alert('Abrindo painel de Tagueamento...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
+                            <i data-lucide="tag" class="w-4 h-4 text-blue-600"></i> Tagueamento de Campanhas
+                        </a>
+                        <a href="#" onclick="alert('Abrindo Upload de Veiculação...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
+                            <i data-lucide="upload-cloud" class="w-4 h-4 text-cyan-600"></i> Upload de Veiculação & Mídia
+                        </a>
+                        <a href="#" onclick="alert('Abrindo regras de Qualificação de Leads...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
+                            <i data-lucide="user-check" class="w-4 h-4 text-purple-600"></i> Regras de Qualificação Leads
+                        </a>
+                    </div>
+                </div>
+
+            </nav>
+
+            <!-- Right Controls -->
+            <div class="flex items-center gap-3">
+                <span class="hidden xl:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-black border border-emerald-300">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span> Tableau Live Engine
+                </span>
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="p-2 rounded-xl bg-slate-100 text-slate-800 hover:text-rose-600 transition-colors" title="Sair">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- EXECUTIVE LIGHT HERO BANNER (SMARTVISION BRAND COLORWAY MESH) -->
+    <section class="max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-4">
+        <div class="smart-hero-mesh rounded-3xl p-8 lg:p-10">
+            
+            <!-- Ambient Brand Spheres -->
+            <div class="ambient-sphere-blue"></div>
+            <div class="ambient-sphere-purple"></div>
+            <div class="ambient-sphere-pink"></div>
+
+            <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div>
+                    <!-- Tagline Pill with Logo Gradient -->
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 shadow-sm border border-blue-200/80 text-blue-900 text-xs font-black mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500"></span>
+                        SEE SMART, GROW FURTHER
+                    </div>
+                    
+                    <h1 class="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                        Plataforma de <span class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Inteligência de Vendas</span>
+                    </h1>
+                    
+                    <p class="text-slate-600 text-sm mt-1.5 font-bold max-w-xl">
+                        Central de inteligência comercial com relatórios unificados e análise avançada de ROI.
+                    </p>
+                </div>
+
+                <!-- 4 Macro Metrics Frosted White Glass Card Strip -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white/85 p-3.5 rounded-2xl backdrop-blur-md border-2 border-slate-200/80 shadow-lg">
+                    <div class="p-2.5">
+                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Receita</span>
+                        <div class="text-lg font-black text-slate-900 mt-0.5">R$ 1,48M</div>
+                        <span class="text-[10px] text-emerald-700 font-black flex items-center gap-0.5">
+                            <i data-lucide="trending-up" class="w-3 h-3"></i> +18.4%
+                        </span>
+                    </div>
+                    <div class="p-2.5 border-l border-slate-200">
+                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Leads</span>
+                        <div class="text-lg font-black text-slate-900 mt-0.5">12.450</div>
+                        <span class="text-[10px] text-blue-700 font-black">Total</span>
+                    </div>
+                    <div class="p-2.5 border-l border-slate-200">
+                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Taxa Conv.</span>
+                        <div class="text-lg font-black text-slate-900 mt-0.5">4.85%</div>
+                        <span class="text-[10px] text-purple-700 font-black">Meta 4.2%</span>
+                    </div>
+                    <div class="p-2.5 border-l border-slate-200">
+                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">ROAS</span>
+                        <div class="text-lg font-black text-emerald-700 mt-0.5">6.91x</div>
+                        <span class="text-[10px] text-slate-600 font-black">Global</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXECUTIVE MASTER CANVAS -->
+    <main id="canvas" class="max-w-7xl mx-auto px-4 lg:px-8 pt-4">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEFT DOCK LISTING ALL 13 ORIGINAL MODULES EXPLICITLY -->
+            <div class="lg:col-span-4 space-y-3">
+                <div class="glass-card p-5">
+                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-200">
+                        <h3 class="text-xs font-black text-slate-800 uppercase tracking-wider">Painéis de Controle (13 Módulos)</h3>
+                        <span class="text-[10px] font-black text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">100% Ativos</span>
+                    </div>
+                    
+                    <div class="space-y-1.5 max-h-[550px] overflow-y-auto pr-1" id="dockModuleList">
+                        <button onclick="loadModuleView('Visão Geral', 1)" id="dock-item-1" class="dock-item-active w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs">1</div>
+                                <span class="text-xs font-black text-slate-900">Visão Geral</span>
+                            </div>
+                            <span class="text-[10px] font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">+18.4%</span>
+                        </button>
+                        <button onclick="loadModuleView('Leads Recebidos', 2)" id="dock-item-2" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-sky-600 text-white flex items-center justify-center font-bold text-xs">2</div>
+                                <span class="text-xs font-bold text-slate-800">Leads Recebidos</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-slate-700">12.450</span>
+                        </button>
+                        <button onclick="loadModuleView('Conversões', 3)" id="dock-item-3" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">3</div>
+                                <span class="text-xs font-bold text-slate-800">Conversões</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-emerald-700">2.418</span>
+                        </button>
+                        <button onclick="loadModuleView('Sales Accepted Leads', 4)" id="dock-item-4" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-cyan-600 text-white flex items-center justify-center font-bold text-xs">4</div>
+                                <span class="text-xs font-bold text-slate-800">Sales Accepted Leads</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-cyan-700">4.820</span>
+                        </button>
+                        <button onclick="loadModuleView('Sales Qualified Leads', 5)" id="dock-item-5" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold text-xs">5</div>
+                                <span class="text-xs font-bold text-slate-800">Sales Qualified Leads</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-purple-700">1.940</span>
+                        </button>
+                        <button onclick="loadModuleView('Sales Closed Leads', 6)" id="dock-item-6" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-teal-600 text-white flex items-center justify-center font-bold text-xs">6</div>
+                                <span class="text-xs font-bold text-slate-800">Sales Closed Leads</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-teal-700">604</span>
+                        </button>
+                        <button onclick="loadModuleView('Google Ads', 7)" id="dock-item-7" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-red-600 text-white font-black flex items-center justify-center text-xs">G</div>
+                                <span class="text-xs font-bold text-slate-800">Google Ads</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">ROAS 7.4x</span>
+                        </button>
+                        <button onclick="loadModuleView('Meta Ads', 8)" id="dock-item-8" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs">M</div>
+                                <span class="text-xs font-bold text-slate-800">Meta Ads</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">ROAS 6.2x</span>
+                        </button>
+                        <button onclick="loadModuleView('Linkedin Ads', 9)" id="dock-item-9" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-cyan-600 text-white flex items-center justify-center font-bold text-xs">in</div>
+                                <span class="text-xs font-bold text-slate-800">Linkedin Ads</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-cyan-700">R$ 38K</span>
+                        </button>
+                        <button onclick="loadModuleView('Taxa de Conversão', 10)" id="dock-item-10" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold text-xs">%</div>
+                                <span class="text-xs font-bold text-slate-800">Taxa de Conversão</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-amber-700">4.85%</span>
+                        </button>
+                        <button onclick="loadModuleView('Blog Posts', 11)" id="dock-item-11" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">B</div>
+                                <span class="text-xs font-bold text-slate-800">Blog Posts</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-indigo-700">48.2K</span>
+                        </button>
+                        <button onclick="loadModuleView('Investimentos', 12)" id="dock-item-12" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-pink-600 text-white flex items-center justify-center font-bold text-xs">R$</div>
+                                <span class="text-xs font-bold text-slate-800">Investimentos</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-pink-700">R$ 214,5K</span>
+                        </button>
+                        <button onclick="loadModuleView('Funil de Vendas', 13)" id="dock-item-13" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold text-xs">F</div>
+                                <span class="text-xs font-bold text-slate-800">Funil de Vendas</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-purple-700">Completo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Action -->
+                <div class="glass-card p-5 bg-gradient-to-br from-blue-700 to-indigo-700 text-white border-0 shadow-xl">
+                    <h4 class="text-xs font-black uppercase tracking-wider">Servidor Tableau Server</h4>
+                    <p class="text-xs text-blue-100 mt-1 font-semibold">Visualização ao vivo conectada ao painel oficial.</p>
+                    <button onclick="openReportViewer(activeModuleName)" class="w-full mt-3 py-2.5 rounded-xl bg-white text-blue-700 text-xs font-black shadow hover:bg-blue-50 transition-colors flex items-center justify-center gap-2">
+                        <i data-lucide="external-link" class="w-4 h-4"></i> Abrir Tableau Full-Screen
+                    </button>
+                </div>
+            </div>
+
+            <!-- RIGHT HIGH-DEFINITION MASTER CANVAS -->
+            <div class="lg:col-span-8">
+                
+                <div class="glass-card p-6 lg:p-8 space-y-6">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                        <div>
+                            <span class="text-[10px] font-black text-blue-700 uppercase tracking-wider" id="activeCategoryTag">Módulo 1 de 13</span>
+                            <h2 class="text-2xl font-black text-slate-900 mt-0.5" id="activeModuleNameDisplay">Visão Geral</h2>
+                        </div>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-black" id="activeMetricBadge">
+                            Status: 100% Ativo
+                        </span>
+                    </div>
+
+                    <div class="w-full h-80">
+                        <canvas id="activeMasterCanvas"></canvas>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200" id="activeMetricDetails">
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Volume Registrado</span>
+                            <div class="text-xl font-black text-slate-900 mt-1" id="detailVal1">12.450</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Variação Mês</span>
+                            <div class="text-xl font-black text-emerald-700 mt-1" id="detailVal2">+18.4% MoM</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Eficiência / ROAS</span>
+                            <div class="text-xl font-black text-blue-700 mt-1" id="detailVal3">6.91x</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="max-w-7xl mx-auto px-4 lg:px-8 mt-16 pt-8 border-t-2 border-slate-300 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-black text-slate-800">
+        <div class="flex items-center gap-3">
+            <img src="assets/smartvision_logo_horizontal.png" alt="SMARTVISION" class="h-6 w-auto object-contain">
+            <span>•</span>
+            <span>Site Defender Protected</span>
+            <span>•</span>
+            <span>© 2026 SMARTVISION - Todos os direitos reservados.</span>
+        </div>
+        <div class="flex items-center gap-6 font-black text-slate-900">
+            <span>Addsuite</span>
+            <span>•</span>
+            <span>new humans</span>
+        </div>
+    </footer>
+
+    <!-- TABLEAU REPORT MODAL VIEWER -->
+    <div id="viewerOverlay" onclick="closeReportViewer()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-50"></div>
+    
+    <div id="viewerModal" class="fixed top-6 left-6 right-6 bottom-6 bg-white shadow-2xl rounded-3xl scale-95 opacity-0 pointer-events-none transition-all duration-300 ease-out z-50 p-6 flex flex-col justify-between border-4 border-slate-300">
+        <div class="flex items-center justify-between pb-4 border-b-2 border-slate-200">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-blue-700 text-white flex items-center justify-center font-black shadow-md">
+                    <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 id="viewerTitle" class="text-xl font-black text-slate-900">Relatório Tableau Full Viz</h2>
+                    <p class="text-xs font-black text-blue-700">tableau.addintelligence.com.br • SMARTVISION Engine</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="alert('Exportando PDF completo do relatório...')" class="px-4 py-2 rounded-xl bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-black flex items-center gap-2 border border-blue-300 transition-colors">
+                    <i data-lucide="download" class="w-4 h-4"></i> Exportar PDF
+                </button>
+                <button onclick="closeReportViewer()" class="p-2.5 rounded-xl bg-slate-200 text-slate-800 hover:text-slate-950 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="my-4 flex-1 bg-slate-50 rounded-2xl border-2 border-slate-300 p-6 overflow-hidden flex flex-col justify-between">
+            <div class="w-full h-80">
+                <canvas id="modalChartCanvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        lucide.createIcons();
+
+        let activeModuleName = "Visão Geral";
+        let masterChartObj = null;
+
+        // Client Selector
+        const clientBtn = document.getElementById('clientDropdownBtn');
+        const clientMenu = document.getElementById('clientDropdownMenu');
+        clientBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            clientMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => clientMenu.classList.add('hidden'));
+
+        function selectClient(name) {
+            document.getElementById('currentClientName').innerText = name;
+            clientMenu.classList.add('hidden');
+        }
+
+        // Load Specific Module View dynamically for all 13 items
+        function loadModuleView(name, id) {
+            activeModuleName = name;
+            document.getElementById('activeModuleNameDisplay').innerText = name;
+            document.getElementById('activeCategoryTag').innerText = `Módulo ${id} de 13`;
+
+            // Active button highlights
+            for (let i = 1; i <= 13; i++) {
+                const btn = document.getElementById(`dock-item-${i}`);
+                if (btn) btn.classList.remove('dock-item-active');
+            }
+            const activeBtn = document.getElementById(`dock-item-${id}`);
+            if (activeBtn) activeBtn.classList.add('dock-item-active');
+
+            // Update Master Canvas Chart
+            renderMasterCanvas(name);
+        }
+
+        function renderMasterCanvas(title) {
+            const ctx = document.getElementById('activeMasterCanvas').getContext('2d');
+            if (masterChartObj) masterChartObj.destroy();
+
+            const grad = ctx.createLinearGradient(0, 0, 0, 200);
+            grad.addColorStop(0, 'rgba(37, 99, 235, 0.3)');
+            grad.addColorStop(1, 'rgba(37, 99, 235, 0.0)');
+
+            const dataPoints = Array.from({length: 8}, () => Math.floor(Math.random() * 800) + 400);
+
+            masterChartObj = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago'],
+                    datasets: [{
+                        label: title,
+                        data: dataPoints,
+                        borderColor: '#2563eb',
+                        borderWidth: 3.5,
+                        backgroundColor: grad,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#1d4ed8'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#334155', font: { size: 11, weight: 'bold' } } },
+                        y: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#334155', font: { size: 11, weight: 'bold' } } }
+                    }
+                }
+            });
+        }
+
+        // Report Viewer Controls
+        let modalChartObj = null;
+
+        function openReportViewer(title) {
+            document.getElementById('viewerTitle').innerText = title;
+            document.getElementById('viewerOverlay').classList.remove('opacity-0', 'pointer-events-none');
+            const modal = document.getElementById('viewerModal');
+            modal.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+
+            const ctx = document.getElementById('modalChartCanvas').getContext('2d');
+            if (modalChartObj) modalChartObj.destroy();
+
+            modalChartObj = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+                    datasets: [{
+                        label: title,
+                        data: [420, 650, 580, 890],
+                        borderColor: '#2563eb',
+                        borderWidth: 3.5,
+                        backgroundColor: 'rgba(37, 99, 235, 0.15)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        function closeReportViewer() {
+            document.getElementById('viewerOverlay').classList.add('opacity-0', 'pointer-events-none');
+            const modal = document.getElementById('viewerModal');
+            modal.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+        }
+
+        // Init page
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMasterCanvas('Visão Geral');
+        });
+    </script>
+</body>
+</html>
