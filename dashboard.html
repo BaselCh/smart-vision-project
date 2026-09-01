@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMARTVISION - Plataforma de Inteligência de Vendas</title>
+    <title>SMARTVISION - Sales Intelligence Platform</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -13,12 +13,11 @@
                 extend: {
                     colors: {
                         smart: {
-                            blue: '#0066ff',
-                            purple: '#7c3aed',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6',
                             pink: '#ec4899',
                             cyan: '#06b6d4',
                             emerald: '#059669',
-                            amber: '#d97706',
                         }
                     },
                     fontFamily: {
@@ -29,548 +28,1695 @@
         }
     </script>
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- GSAP for Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f8fafc;
+            background-color: #f1f5f9;
             color: #0f172a;
+            margin: 0;
+            padding: 0;
         }
 
-        /* SMARTVISION Light Brand Hero Mesh Gradient */
-        .smart-hero-mesh {
-            background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 45%, #fdf2f8 100%);
-            border: 2px solid #e2e8f0;
-            box-shadow: 0 15px 35px -10px rgba(37, 99, 235, 0.08), 0 5px 15px rgba(0, 0, 0, 0.03);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Ambient Brand Spheres (Blue, Purple, Pink, Cyan) */
-        .ambient-sphere-blue {
-            position: absolute;
-            top: -60px;
-            left: -60px;
-            width: 280px;
-            height: 280px;
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.18) 0%, rgba(0, 102, 255, 0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .ambient-sphere-purple {
-            position: absolute;
-            bottom: -60px;
-            right: 20%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .ambient-sphere-pink {
-            position: absolute;
-            top: -40px;
-            right: -40px;
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(236, 72, 153, 0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        /* Next-Gen Glass Panel */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
+        /* FLOATING HUD MENU */
+        .dashboard-floating-nav {
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1.5px solid #e2e8f0;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
             transition: all 0.25s ease;
         }
-        .glass-card:hover {
-            border-color: #2563eb;
-            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.15);
+
+        /* HERO BANNER CONTAINER GRADIENT MESH */
+        .exact-hero-banner {
+            background: linear-gradient(108deg, #dbeafe 0%, #e0e7ff 30%, #f3e8ff 65%, #fce7f3 100%);
+            border-radius: 2.25rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            position: relative;
+            overflow: visible !important;
+            z-index: 20;
         }
 
-        /* Floating Nav HUD */
-        .floating-nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+        /* TITLE SIZE AT 35PX */
+        .tight-negocios-title {
+            font-size: 35px !important;
+            line-height: 1.2 !important;
+            letter-spacing: -0.04em !important;
+        }
+
+        /* GRADIENT TEXT ON 'Inteligência de Negócios' */
+        .gradient-negocios-text {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 45%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline;
+        }
+
+        /* EXACT SUBTITLE COLOR & TYPOGRAPHY */
+        .subtitle-exact-negocios {
+            color: #808a9d;
+            font-size: 0.98rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        /* ELEGANT WHITE KPI FLOATING CARD */
+        .exact-kpi-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 14px 35px -8px rgba(0, 0, 0, 0.07), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(241, 245, 249, 0.9);
+            width: 430px !important;
+            height: 148px !important;
+            box-sizing: border-box;
+            padding-left: 1.15rem !important;
+            padding-right: 1.15rem !important;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: visible !important;
+            z-index: 30;
+        }
+
+        .nowrap-val {
+            white-space: nowrap !important;
+        }
+
+        /* PAINÉIS DE CONTROLE PANEL CONTAINER */
+        .paineis-controle-card {
+            background: #ffffff;
+            border-radius: 2rem;
             border: 1.5px solid #e2e8f0;
-            box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+            padding: 1.75rem 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Interactive Hover Dropdown Submenus */
-        .nav-item-group {
+        /* MODULE ITEM STYLES */
+        .paineis-item-btn {
+            width: 100%;
+            padding: 0.85rem 1.15rem;
+            border-radius: 1.25rem;
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .paineis-item-btn:hover {
+            border-color: #3b82f6;
+            background: #f8fafc;
+            transform: translateY(-1px);
+        }
+
+        /* ACTIVE MODULE ITEM STYLING */
+        .paineis-item-btn.active-paineis-item {
+            background: #eff6ff !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 4px 12px -2px rgba(59, 130, 246, 0.12);
+        }
+
+        .paineis-item-btn.active-paineis-item .paineis-badge {
+            background-color: #3b82f6 !important;
+            color: #ffffff !important;
+        }
+
+        .paineis-item-btn.active-paineis-item .paineis-text {
+            color: #0f172a !important;
+            font-weight: 800 !important;
+        }
+
+        /* BADGE ICON CONTAINER */
+        .paineis-badge {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.95rem;
+            color: #ffffff;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        /* MAIN DISPLAY CANVAS CARD */
+        .master-display-card {
+            background: #ffffff;
+            border-radius: 2rem;
+            border: 1.5px solid #e2e8f0;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+            padding: 1.75rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
         }
-        .nav-dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            margin-top: 0.5rem;
-            width: 270px;
+
+        /* FILTER BUTTON PILL */
+        .filter-trigger-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 1.15rem;
+            border-radius: 9999px;
             background: #ffffff;
-            border: 2px solid #cbd5e1;
+            border: 1.5px solid #e2e8f0;
+            color: #334155;
+            font-size: 0.84rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        .filter-trigger-btn:hover {
+            border-color: #3b82f6;
+            color: #2563eb;
+            background: #eff6ff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+
+        /* EXACT FROSTED GLASS STYLE MATCHING media_1788286008163.png 100% */
+        .frosted-glass-style {
+            background: rgba(255, 255, 255, 0.65) !important;
+            backdrop-filter: blur(30px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+            border-radius: 1.75rem !important; /* 28px */
+            box-shadow: 0 25px 60px -10px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
+        }
+
+        .frosted-glass-input {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border: 1.5px solid rgba(226, 232, 240, 0.9) !important;
+            border-radius: 1rem !important;
+            color: #0f172a !important;
+            font-weight: 800 !important;
+            font-size: 0.88rem !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+        }
+
+        .frosted-glass-btn-preset {
+            background: rgba(241, 245, 249, 0.65) !important;
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            border-radius: 0.85rem !important;
+            color: #334155 !important;
+            font-weight: 700 !important;
+            font-size: 0.75rem !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .frosted-glass-btn-preset:hover {
+            background: rgba(239, 246, 255, 0.9) !important;
+            color: #2563eb !important;
+        }
+
+        .frosted-glass-btn-preset.active-preset {
+            background: rgba(239, 246, 255, 0.95) !important;
+            color: #2563eb !important;
+            border: 1.5px solid #bfdbfe !important;
+            font-weight: 800 !important;
+        }
+
+        .frosted-glass-item {
+            width: 100%;
+            text-align: left;
+            padding: 0.85rem 1.15rem;
+            border-radius: 1rem;
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #1e293b;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid transparent;
+        }
+
+        .frosted-glass-item:hover {
+            background: rgba(239, 246, 255, 0.9);
+            color: #2563eb;
+            border-color: rgba(191, 219, 254, 0.8);
+        }
+
+        .frosted-glass-item.active-glass-item {
+            background: rgba(239, 246, 255, 0.95) !important;
+            color: #2563eb !important;
+            border: 1.5px solid #bfdbfe !important;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+        }
+
+        /* RIGHT METRIC CARD TILES */
+        .metric-tile-card {
+            background: #F6F9FB !important;
+            border: 1px solid #E4EAF1 !important;
             border-radius: 1.25rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
-            padding: 0.5rem 0;
-            z-index: 100;
-            animation: fadeInDown 0.2s ease;
-        }
-        .nav-item-group:hover .nav-dropdown-menu {
-            display: block;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
+            padding: 0.9rem 0.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Left Dock Item Active State */
-        .dock-item-active {
-            background: #eff6ff !important;
-            border-color: #2563eb !important;
-            color: #1d4ed8 !important;
-            font-weight: 900 !important;
+        .metric-tile-card:hover {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        /* BOTTOM RIBBON BUTTONS */
+        .ribbon-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            border-radius: 1rem;
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.15);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .ribbon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px -4px rgba(0, 0, 0, 0.25);
+        }
+
+        /* PURPLE RIBBON BUTTON */
+        .ribbon-btn-purple {
+            background: linear-gradient(135deg, #7e22ce 0%, #6b21a8 50%, #581c87 100%);
+        }
+
+        /* DARK AI RIBBON BUTTON */
+        .ribbon-btn-dark {
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+        }
+
+        /* ANGLED RIBBON ACCENTS */
+        .ribbon-accent-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 16px;
+            background: linear-gradient(180deg, #f59e0b 0%, #ef4444 100%);
+            clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);
+        }
+
+        .ribbon-accent-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 16px;
+            background: linear-gradient(180deg, #84cc16 0%, #06b6d4 100%);
+            clip-path: polygon(60% 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        /* AI POPUP MODAL GLASS STYLING - COMPACT PROPORTIONAL DESIGN */
+        .ai-modal-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(35px) saturate(200%);
+            -webkit-backdrop-filter: blur(35px) saturate(200%);
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
+            border-radius: 1.75rem;
+            box-shadow: 0 25px 60px -10px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+        }
+
+        .ai-sidebar-glass {
+            background: rgba(248, 250, 252, 0.85);
+            border-right: 1.5px solid rgba(226, 232, 240, 0.85);
+        }
+
+        .ai-question-pill-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1.5px solid rgba(226, 232, 240, 0.9);
+            border-radius: 0.95rem;
+            padding: 0.65rem 0.85rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #334155;
+            text-align: left;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            width: 100%;
+        }
+
+        .ai-question-pill-btn:hover {
+            background: #eff6ff;
+            border-color: #93c5fd;
+            color: #1d4ed8;
+            transform: translateX(2px);
+            box-shadow: 0 3px 8px rgba(59, 130, 246, 0.08);
+        }
+
+        .chat-bubble-user {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border-radius: 1.15rem 1.15rem 0.2rem 1.15rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .chat-bubble-ai {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1.5px solid #e2e8f0;
+            color: #0f172a;
+            border-radius: 1.15rem 1.15rem 1.15rem 0.2rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Custom Scrollbar - Hidden completely */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-900 pb-20">
 
     <!-- FLOATING HUD NAVIGATION BAR -->
     <header class="sticky top-4 z-50 max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="floating-nav rounded-2xl px-6 py-3 flex items-center justify-between">
+        <div class="dashboard-floating-nav px-6 py-3 flex items-center justify-between">
             
-            <!-- Left: Official SMARTVISION Logo & Client Switcher -->
+            <!-- LEFT: SMARTVISION LOGO | CLIENT NAME WITH PULSING GREEN DOT -->
             <div class="flex items-center gap-5">
-                <a href="#" class="flex items-center">
+                <a href="dashboard.html" class="flex items-center">
                     <img src="assets/smartvision_logo_horizontal.png" alt="SMARTVISION - SEE SMART, GROW FURTHER" class="h-8 w-auto object-contain">
                 </a>
 
-                <div class="hidden sm:block w-px h-6 bg-slate-300"></div>
+                <div class="w-px h-6 bg-slate-200/90 mx-1"></div>
 
-                <!-- Client Selector Dropdown -->
-                <div class="relative">
-                    <button id="clientDropdownBtn" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs font-black text-blue-800 hover:bg-blue-100 transition-colors">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-                        <span id="currentClientName">CHLEBA</span>
-                        <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-blue-700"></i>
-                    </button>
-                    <!-- Client List Dropdown -->
-                    <div id="clientDropdownMenu" class="hidden absolute top-full left-0 mt-2 w-52 rounded-2xl bg-white shadow-2xl border-2 border-slate-300 py-2 z-50">
-                        <div class="px-3 py-1 text-[10px] font-black text-slate-500 uppercase">Selecionar Cliente</div>
-                        <button onclick="selectClient('CHLEBA')" class="w-full text-left px-3 py-2 text-xs font-black text-blue-700 bg-blue-50 flex items-center justify-between">
-                            CHLEBA <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
-                        </button>
-                        <button onclick="selectClient('ADDSUITE')" class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100">ADDSUITE</button>
-                        <button onclick="selectClient('PLAENGE')" class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100">PLAENGE</button>
-                        <button onclick="selectClient('MACKENZIE')" class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100">MACKENZIE</button>
-                        <button onclick="selectClient('SEB')" class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100">SEB</button>
-                    </div>
+                <!-- Static Client Online Status Indicator Pill (CHLEBA) -->
+                <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-blue-50/60 border border-blue-100/80">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+                    <span class="text-sm font-black text-blue-700 tracking-wide">CHLEBA</span>
                 </div>
             </div>
 
-            <!-- Middle Nav Links with WORKING MOUSE HOVER DROPDOWNS -->
-            <nav class="hidden md:flex items-center gap-6 text-xs font-extrabold text-slate-800">
-                
-                <!-- 1. Dashboards Hover Dropdown -->
-                <div class="nav-item-group py-2 cursor-pointer">
-                    <span class="text-blue-700 font-black flex items-center gap-1.5 bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-200 hover:bg-blue-100 transition-all">
-                        <i data-lucide="layout-dashboard" class="w-4 h-4 text-blue-600"></i> Dashboards <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-blue-700"></i>
-                    </span>
-                    <div class="nav-dropdown-menu">
-                        <div class="px-4 py-1.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Dashboards Comerciais</div>
-                        <a href="#canvas" onclick="loadModuleView('Visão Geral', 1)" class="flex items-center gap-2.5 px-4 py-2.5 text-blue-700 font-black bg-blue-50">
-                            <i data-lucide="pie-chart" class="w-4 h-4 text-blue-600"></i> Visão Geral & Performance
-                        </a>
-                        <a href="#canvas" onclick="loadModuleView('Funil de Vendas', 13)" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
-                            <i data-lucide="filter-x" class="w-4 h-4 text-purple-600"></i> Funil de Vendas Completo
-                        </a>
-                        <a href="#canvas" onclick="loadModuleView('Google Ads', 7)" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
-                            <i data-lucide="target" class="w-4 h-4 text-red-600"></i> Performance Mídia Ads
-                        </a>
-                        <div class="my-1 border-t border-slate-200"></div>
-                        <a href="#" onclick="openReportViewer('Histórico Tableau')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-700 font-bold hover:bg-slate-100">
-                            <i data-lucide="history" class="w-4 h-4 text-slate-500"></i> Histórico de Dashboards
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 2. Cubos de dados Hover Dropdown -->
-                <div class="nav-item-group py-2 cursor-pointer">
-                    <span class="hover:text-blue-700 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-slate-100">
-                        <i data-lucide="database" class="w-4 h-4 text-slate-600"></i> Cubos de dados <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
-                    </span>
-                    <div class="nav-dropdown-menu">
-                        <div class="px-4 py-1.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Exportação & Dados</div>
-                        <a href="#" onclick="alert('Iniciando download do cubo em Excel/CSV...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
-                            <i data-lucide="download" class="w-4 h-4 text-emerald-600"></i> Download de Cubos (Excel/CSV)
-                        </a>
-                        <a href="#" onclick="alert('Abrindo gerador de cubo customizado...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
-                            <i data-lucide="cpu" class="w-4 h-4 text-purple-600"></i> Gerar Novo Cubo de Dados
-                        </a>
-                        <a href="#" onclick="alert('Status da conexão Tableau Data Engine: Live')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
-                            <i data-lucide="refresh-cw" class="w-4 h-4 text-blue-600"></i> Conectar Tableau Live Engine
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 3. Configurações Hover Dropdown -->
-                <div class="nav-item-group py-2 cursor-pointer">
-                    <span class="hover:text-blue-700 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-slate-100">
-                        <i data-lucide="settings" class="w-4 h-4 text-slate-600"></i> Configurações <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
-                    </span>
-                    <div class="nav-dropdown-menu w-72">
-                        <div class="px-4 py-1.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Configurações Manuais</div>
-                        <a href="#" onclick="alert('Abrindo painel de Tagueamento...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
-                            <i data-lucide="tag" class="w-4 h-4 text-blue-600"></i> Tagueamento de Campanhas
-                        </a>
-                        <a href="#" onclick="alert('Abrindo Upload de Veiculação...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
-                            <i data-lucide="upload-cloud" class="w-4 h-4 text-cyan-600"></i> Upload de Veiculação & Mídia
-                        </a>
-                        <a href="#" onclick="alert('Abrindo regras de Qualificação de Leads...')" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-800 font-bold hover:bg-slate-100">
-                            <i data-lucide="user-check" class="w-4 h-4 text-purple-600"></i> Regras de Qualificação Leads
-                        </a>
-                    </div>
-                </div>
-
-            </nav>
-
-            <!-- Right Controls -->
+            <!-- RIGHT: DASHBOARD BUTTON | HISTÓRICO BUTTON | EXIT BUTTON -->
             <div class="flex items-center gap-3">
-                <span class="hidden xl:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-black border border-emerald-300">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span> Tableau Live Engine
-                </span>
-                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="p-2 rounded-xl bg-slate-100 text-slate-800 hover:text-rose-600 transition-colors" title="Sair">
+                <button onclick="window.location.href='dashboard.html'" class="px-4 py-2 rounded-xl bg-blue-50/90 border border-blue-200/90 text-blue-600 text-xs font-black flex items-center gap-2 shadow-sm hover:bg-blue-100/80 transition-all">
+                    <i data-lucide="layout-grid" class="w-4 h-4 text-blue-600"></i>
+                    <span>Dashboard</span>
+                </button>
+
+                <button onclick="openReportViewer('Histórico de Dashboards')" class="px-4 py-2 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 text-slate-800 text-xs font-black flex items-center gap-2 transition-colors">
+                    <i data-lucide="history" class="w-4 h-4 text-slate-700"></i>
+                    <span>Histórico</span>
+                </button>
+
+                <button onclick="sessionStorage.clear(); localStorage.clear(); window.location.href='index.html';" class="p-2.5 rounded-xl bg-slate-100/90 text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition-colors" title="Sair">
                     <i data-lucide="log-out" class="w-4 h-4"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- EXECUTIVE LIGHT HERO BANNER (SMARTVISION BRAND COLORWAY MESH) -->
-    <section class="max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-4">
-        <div class="smart-hero-mesh rounded-3xl p-8 lg:p-10">
+    <!-- PERFECT HERO BANNER -->
+    <section class="max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-4 relative z-20">
+        <div class="exact-hero-banner p-7 sm:p-9 lg:p-10">
             
-            <!-- Ambient Brand Spheres -->
-            <div class="ambient-sphere-blue"></div>
-            <div class="ambient-sphere-purple"></div>
-            <div class="ambient-sphere-pink"></div>
-
-            <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                <div>
-                    <!-- Tagline Pill with Logo Gradient -->
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 shadow-sm border border-blue-200/80 text-blue-900 text-xs font-black mb-3">
-                        <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500"></span>
-                        SEE SMART, GROW FURTHER
+            <div class="relative z-10 flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-6 lg:gap-8">
+                
+                <!-- LEFT CONTENT AREA -->
+                <div class="flex-1 min-w-0 text-left">
+                    <!-- Pill Badge: SEE SMART, GROW FURTHER -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 shadow-sm border border-slate-200/70 text-slate-700 text-[11px] font-extrabold mb-4">
+                        <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-500"></span>
+                        <span class="text-blue-900 font-extrabold tracking-wide">SEE SMART, GROW FURTHER</span>
                     </div>
                     
-                    <h1 class="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                        Plataforma de <span class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Inteligência de Vendas</span>
+                    <!-- Heading: Plataforma de Inteligência de Negócios -->
+                    <h1 class="tight-negocios-title font-black text-slate-900 mb-2 whitespace-nowrap">
+                        Plataforma de <span class="gradient-negocios-text">Inteligência de Negócios</span>
                     </h1>
                     
-                    <p class="text-slate-600 text-sm mt-1.5 font-bold max-w-xl">
+                    <!-- Subtitle -->
+                    <p class="subtitle-exact-negocios leading-relaxed">
                         Central de inteligência comercial com relatórios unificados e análise avançada de ROI.
                     </p>
                 </div>
 
-                <!-- 4 Macro Metrics Frosted White Glass Card Strip -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white/85 p-3.5 rounded-2xl backdrop-blur-md border-2 border-slate-200/80 shadow-lg">
-                    <div class="p-2.5">
-                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Receita</span>
-                        <div class="text-lg font-black text-slate-900 mt-0.5">R$ 1,48M</div>
-                        <span class="text-[10px] text-emerald-700 font-black flex items-center gap-0.5">
-                            <i data-lucide="trending-up" class="w-3 h-3"></i> +18.4%
-                        </span>
+                <!-- RIGHT CONTENT AREA: THE WHITE FLOATING KPI CARD -->
+                <div class="exact-kpi-card shrink-0">
+                    
+                    <!-- TOP-LEFT INTERACTIVE 14 DIAS CALENDAR BUTTON & UNCLIPPED FROSTED GLASS DROPDOWN -->
+                    <div class="absolute top-2.5 left-3.5 z-40">
+                        <button id="dateRangePickerBtn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-blue-50 border border-slate-200/80 text-blue-600 font-extrabold transition-all cursor-pointer shadow-sm group">
+                            <div class="w-5 h-5 rounded-md bg-white flex items-center justify-center text-blue-600">
+                                <i data-lucide="calendar-check" class="w-3.5 h-3.5"></i>
+                            </div>
+                            <span id="dateRangeText" class="text-[11px] font-extrabold text-blue-600 uppercase tracking-wider">14 DIAS</span>
+                            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-blue-500 group-hover:text-blue-700 transition-transform duration-200" id="dateChevron"></i>
+                        </button>
+
+                        <!-- EXACT FROSTED GLASS CALENDAR DROPDOWN MENU MATCHING media_1788286008163.png 100% -->
+                        <div id="dateRangeDropdown" class="hidden absolute top-full left-0 mt-2.5 w-72 frosted-glass-style p-5 z-[100] text-left">
+                            <div class="flex items-center justify-between pb-3 border-b border-slate-200/60 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i>
+                                    <span class="text-xs font-black text-slate-900">Período de Análise</span>
+                                </div>
+                                <button onclick="toggleDateRangeDropdown()" class="text-slate-400 hover:text-slate-600 p-1 rounded-full hover:bg-slate-200/50">
+                                    <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+
+                            <!-- START & END DATE INPUTS WITH EXACT TRANSLUCENT GLASS CAPSULE STYLING -->
+                            <div class="space-y-3 mb-4">
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">DATA INICIAL (INÍCIO)</label>
+                                    <input type="date" id="startDateInput" value="2026-08-18" class="w-full px-3.5 py-2 frosted-glass-input focus:outline-none focus:border-blue-500 focus:bg-white transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">DATA FINAL (FIM)</label>
+                                    <input type="date" id="endDateInput" value="2026-09-01" class="w-full px-3.5 py-2 frosted-glass-input focus:outline-none focus:border-blue-500 focus:bg-white transition-colors">
+                                </div>
+                            </div>
+
+                            <!-- PRESET QUICK BUTTONS WITH EXACT FROSTED CAPSULE STYLING -->
+                            <div class="grid grid-cols-2 gap-2 mb-4">
+                                <button onclick="setPresetDateRange(7)" class="px-2.5 py-2.5 frosted-glass-btn-preset text-center">Últimos 7 dias</button>
+                                <button onclick="setPresetDateRange(14)" class="px-2.5 py-2.5 frosted-glass-btn-preset active-preset text-center">Últimos 14 dias</button>
+                                <button onclick="setPresetDateRange(30)" class="px-2.5 py-2.5 frosted-glass-btn-preset text-center">Últimos 30 dias</button>
+                                <button onclick="setPresetDateRange(90)" class="px-2.5 py-2.5 frosted-glass-btn-preset text-center">Últimos 90 dias</button>
+                            </div>
+
+                            <!-- APLICAR BLUE BUTTON WITH EXACT ICON AND STYLING -->
+                            <button onclick="applyDateRangeFilter()" class="w-full py-3 rounded-2xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 transition-all hover:scale-[1.01]">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                                <span>Aplicar</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="p-2.5 border-l border-slate-200">
-                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Leads</span>
-                        <div class="text-lg font-black text-slate-900 mt-0.5">12.450</div>
-                        <span class="text-[10px] text-blue-700 font-black">Total</span>
-                    </div>
-                    <div class="p-2.5 border-l border-slate-200">
-                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Taxa Conv.</span>
-                        <div class="text-lg font-black text-slate-900 mt-0.5">4.85%</div>
-                        <span class="text-[10px] text-purple-700 font-black">Meta 4.2%</span>
-                    </div>
-                    <div class="p-2.5 border-l border-slate-200">
-                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">ROAS</span>
-                        <div class="text-lg font-black text-emerald-700 mt-0.5">6.91x</div>
-                        <span class="text-[10px] text-slate-600 font-black">Global</span>
+
+                    <!-- 4 EQUAL COLUMNS WITH 10% ENLARGED FONTS & SYMMETRIC SPACING -->
+                    <div class="grid grid-cols-4 divide-x divide-slate-200/70 w-full pt-5">
+                        
+                        <!-- 1. RECEITA -->
+                        <div class="pr-2 pl-0 flex flex-col justify-center">
+                            <span class="text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">RECEITA</span>
+                            <div id="valReceita" class="text-[19px] font-black text-slate-900 tracking-tight leading-none nowrap-val mb-1">R$ 1,48M</div>
+                            <span id="trendReceita" class="text-[12px] font-bold text-emerald-600 flex items-center gap-0.5 nowrap-val">
+                                <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> +18.4%
+                            </span>
+                        </div>
+
+                        <!-- 2. LEADS -->
+                        <div class="px-2 flex flex-col justify-center">
+                            <span class="text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">LEADS</span>
+                            <div id="valLeads" class="text-[19px] font-black text-slate-900 tracking-tight leading-none nowrap-val mb-1">12.450</div>
+                            <span class="text-[12px] font-bold text-blue-600 block nowrap-val">Total</span>
+                        </div>
+
+                        <!-- 3. TAXA CONV. -->
+                        <div class="px-2 flex flex-col justify-center">
+                            <span class="text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">TAXA CONV.</span>
+                            <div id="valTaxa" class="text-[19px] font-black text-slate-900 tracking-tight leading-none nowrap-val mb-1">4.85%</div>
+                            <span class="text-[12px] font-bold text-purple-600 block nowrap-val">Meta 4.2%</span>
+                        </div>
+
+                        <!-- 4. ROAS -->
+                        <div class="pl-2 pr-0 flex flex-col justify-center">
+                            <span class="text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">ROAS</span>
+                            <div id="valRoas" class="text-[19px] font-black text-emerald-600 tracking-tight leading-none nowrap-val mb-1">6.91x</div>
+                            <span class="text-[12px] font-bold text-slate-500 block nowrap-val">Global</span>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- EXECUTIVE MASTER CANVAS -->
-    <main id="canvas" class="max-w-7xl mx-auto px-4 lg:px-8 pt-4">
+    <!-- EXECUTIVE MASTER DISPLAY CANVAS -->
+    <main id="canvas" class="max-w-7xl mx-auto px-4 lg:px-8 pt-4 relative z-10">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
-            <!-- LEFT DOCK LISTING ALL 13 ORIGINAL MODULES EXPLICITLY -->
-            <div class="lg:col-span-4 space-y-3">
-                <div class="glass-card p-5">
-                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-200">
-                        <h3 class="text-xs font-black text-slate-800 uppercase tracking-wider">Painéis de Controle (13 Módulos)</h3>
-                        <span class="text-[10px] font-black text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">100% Ativos</span>
-                    </div>
+            <!-- LEFT DOCK: PAINÉIS DE CONTROLE -->
+            <div class="lg:col-span-4 h-full">
+                <div class="paineis-controle-card">
+                    <!-- SECTION TITLE: PAINÉIS DE CONTROLE -->
+                    <h3 class="text-base font-extrabold text-slate-800 uppercase tracking-wider mb-6">
+                        PAINÉIS DE CONTROLE
+                    </h3>
                     
-                    <div class="space-y-1.5 max-h-[550px] overflow-y-auto pr-1" id="dockModuleList">
-                        <button onclick="loadModuleView('Visão Geral', 1)" id="dock-item-1" class="dock-item-active w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs">1</div>
-                                <span class="text-xs font-black text-slate-900">Visão Geral</span>
-                            </div>
-                            <span class="text-[10px] font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">+18.4%</span>
+                    <!-- THE EXACT 5 CONTROL PANELS LIST WITH EXACT 20PX SPACING BETWEEN BUTTONS -->
+                    <div class="space-y-[20px]" id="paineisModuleList">
+                        
+                        <!-- 1. Visão Geral (ACTIVE BY DEFAULT) -->
+                        <button onclick="loadPaineisModule('Visão Geral', 1)" id="paineis-item-1" class="paineis-item-btn active-paineis-item">
+                            <div class="paineis-badge bg-blue-600">1</div>
+                            <span class="paineis-text text-sm font-extrabold text-slate-900">Visão Geral</span>
                         </button>
-                        <button onclick="loadModuleView('Leads Recebidos', 2)" id="dock-item-2" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-sky-600 text-white flex items-center justify-center font-bold text-xs">2</div>
-                                <span class="text-xs font-bold text-slate-800">Leads Recebidos</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-700">12.450</span>
-                        </button>
-                        <button onclick="loadModuleView('Conversões', 3)" id="dock-item-3" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">3</div>
-                                <span class="text-xs font-bold text-slate-800">Conversões</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-emerald-700">2.418</span>
-                        </button>
-                        <button onclick="loadModuleView('Sales Accepted Leads', 4)" id="dock-item-4" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-cyan-600 text-white flex items-center justify-center font-bold text-xs">4</div>
-                                <span class="text-xs font-bold text-slate-800">Sales Accepted Leads</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-cyan-700">4.820</span>
-                        </button>
-                        <button onclick="loadModuleView('Sales Qualified Leads', 5)" id="dock-item-5" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold text-xs">5</div>
-                                <span class="text-xs font-bold text-slate-800">Sales Qualified Leads</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-purple-700">1.940</span>
-                        </button>
-                        <button onclick="loadModuleView('Sales Closed Leads', 6)" id="dock-item-6" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-teal-600 text-white flex items-center justify-center font-bold text-xs">6</div>
-                                <span class="text-xs font-bold text-slate-800">Sales Closed Leads</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-teal-700">604</span>
-                        </button>
-                        <button onclick="loadModuleView('Google Ads', 7)" id="dock-item-7" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-red-600 text-white font-black flex items-center justify-center text-xs">G</div>
-                                <span class="text-xs font-bold text-slate-800">Google Ads</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">ROAS 7.4x</span>
-                        </button>
-                        <button onclick="loadModuleView('Meta Ads', 8)" id="dock-item-8" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs">M</div>
-                                <span class="text-xs font-bold text-slate-800">Meta Ads</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">ROAS 6.2x</span>
-                        </button>
-                        <button onclick="loadModuleView('Linkedin Ads', 9)" id="dock-item-9" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-cyan-600 text-white flex items-center justify-center font-bold text-xs">in</div>
-                                <span class="text-xs font-bold text-slate-800">Linkedin Ads</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-cyan-700">R$ 38K</span>
-                        </button>
-                        <button onclick="loadModuleView('Taxa de Conversão', 10)" id="dock-item-10" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold text-xs">%</div>
-                                <span class="text-xs font-bold text-slate-800">Taxa de Conversão</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-amber-700">4.85%</span>
-                        </button>
-                        <button onclick="loadModuleView('Blog Posts', 11)" id="dock-item-11" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">B</div>
-                                <span class="text-xs font-bold text-slate-800">Blog Posts</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-indigo-700">48.2K</span>
-                        </button>
-                        <button onclick="loadModuleView('Investimentos', 12)" id="dock-item-12" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-pink-600 text-white flex items-center justify-center font-bold text-xs">R$</div>
-                                <span class="text-xs font-bold text-slate-800">Investimentos</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-pink-700">R$ 214,5K</span>
-                        </button>
-                        <button onclick="loadModuleView('Funil de Vendas', 13)" id="dock-item-13" class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-left transition-all flex items-center justify-between hover:border-blue-500">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold text-xs">F</div>
-                                <span class="text-xs font-bold text-slate-800">Funil de Vendas</span>
-                            </div>
-                            <span class="text-[10px] font-bold text-purple-700">Completo</span>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Quick Action -->
-                <div class="glass-card p-5 bg-gradient-to-br from-blue-700 to-indigo-700 text-white border-0 shadow-xl">
-                    <h4 class="text-xs font-black uppercase tracking-wider">Servidor Tableau Server</h4>
-                    <p class="text-xs text-blue-100 mt-1 font-semibold">Visualização ao vivo conectada ao painel oficial.</p>
-                    <button onclick="openReportViewer(activeModuleName)" class="w-full mt-3 py-2.5 rounded-xl bg-white text-blue-700 text-xs font-black shadow hover:bg-blue-50 transition-colors flex items-center justify-center gap-2">
-                        <i data-lucide="external-link" class="w-4 h-4"></i> Abrir Tableau Full-Screen
-                    </button>
+                        <!-- 2. Leads e Vendas -->
+                        <button onclick="loadPaineisModule('Leads e Vendas', 2)" id="paineis-item-2" class="paineis-item-btn">
+                            <div class="paineis-badge bg-sky-500">2</div>
+                            <span class="paineis-text text-sm font-bold text-slate-700">Leads e Vendas</span>
+                        </button>
+
+                        <!-- 3. Conversão e Performance -->
+                        <button onclick="loadPaineisModule('Conversão e Performance', 3)" id="paineis-item-3" class="paineis-item-btn">
+                            <div class="paineis-badge bg-emerald-500">3</div>
+                            <span class="paineis-text text-sm font-bold text-slate-700">Conversão e Performance</span>
+                        </button>
+
+                        <!-- 4. Mídia Paga -->
+                        <button onclick="loadPaineisModule('Mídia Paga', 4)" id="paineis-item-4" class="paineis-item-btn">
+                            <div class="paineis-badge bg-teal-500">4</div>
+                            <span class="paineis-text text-sm font-bold text-slate-700">Mídia Paga</span>
+                        </button>
+
+                        <!-- 5. Conteúdo e Site -->
+                        <button onclick="loadPaineisModule('Conteúdo e Site', 5)" id="paineis-item-5" class="paineis-item-btn">
+                            <div class="paineis-badge bg-rose-500">5</div>
+                            <span class="paineis-text text-sm font-bold text-slate-700">Conteúdo e Site</span>
+                        </button>
+
+                    </div>
                 </div>
             </div>
 
-            <!-- RIGHT HIGH-DEFINITION MASTER CANVAS -->
-            <div class="lg:col-span-8">
-                
-                <div class="glass-card p-6 lg:p-8 space-y-6">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-200">
-                        <div>
-                            <span class="text-[10px] font-black text-blue-700 uppercase tracking-wider" id="activeCategoryTag">Módulo 1 de 13</span>
-                            <h2 class="text-2xl font-black text-slate-900 mt-0.5" id="activeModuleNameDisplay">Visão Geral</h2>
+            <!-- RIGHT DISPLAY CANVAS -->
+            <div class="lg:col-span-8 h-full">
+                <div class="master-display-card">
+                    
+                    <!-- 1. TOP HEADER & FILTERS ROW -->
+                    <div class="flex items-center justify-between mb-4 w-full relative">
+                        
+                        <!-- LEFT: FROSTED GLASS FILTER DROPDOWN TRIGGER & MENU (ZERO LAYOUT SHIFT) -->
+                        <div class="relative z-40" id="filterDropdownContainer">
+                            <button id="filterDropdownBtn" onclick="toggleCanvasFilters(event)" class="filter-trigger-btn group">
+                                <i data-lucide="sliders-horizontal" class="w-4 h-4 text-blue-600 group-hover:rotate-90 transition-transform"></i>
+                                <span>Filtros</span>
+                                <i data-lucide="chevron-down" id="filterChevronIcon" class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 transition-transform"></i>
+                            </button>
+
+                            <!-- FROSTED GLASS FILTER DROPDOWN MENU -->
+                            <div id="filterGlassMenu" class="hidden absolute left-0 top-full mt-2.5 w-80 frosted-glass-style p-5 z-[100] text-left space-y-3.5 shadow-2xl">
+                                
+                                <div class="flex items-center justify-between pb-2.5 border-b border-slate-200/60">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="filter" class="w-4 h-4 text-blue-600"></i>
+                                        <span class="text-xs font-black text-slate-900">Filtros de Análise</span>
+                                    </div>
+                                    <button onclick="toggleCanvasFilters(event)" class="text-slate-400 hover:text-slate-600 p-1 rounded-full hover:bg-slate-200/50">
+                                        <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </div>
+
+                                <!-- 5 SELECTORS IN CLEAN FROSTED CAPSULES -->
+                                <div class="grid grid-cols-2 gap-2.5">
+                                    
+                                    <!-- 1. Ano -->
+                                    <div>
+                                        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">ANO</label>
+                                        <select id="filterAno" onchange="renderMasterCanvas(activeModuleName)" class="w-full px-3 py-2 frosted-glass-input focus:outline-none focus:border-blue-500 cursor-pointer">
+                                            <option value="2026">2026</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2024">2024</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- 2. Mês -->
+                                    <div>
+                                        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">MÊS</label>
+                                        <select id="filterMes" onchange="renderMasterCanvas(activeModuleName)" class="w-full px-3 py-2 frosted-glass-input focus:outline-none focus:border-blue-500 cursor-pointer">
+                                            <option value="Todos">Todos</option>
+                                            <option value="Jan">Janeiro</option>
+                                            <option value="Fev">Fevereiro</option>
+                                            <option value="Mar">Março</option>
+                                            <option value="Abr">Abril</option>
+                                            <option value="Mai">Maio</option>
+                                            <option value="Jun">Junho</option>
+                                            <option value="Jul">Julho</option>
+                                            <option value="Ago" selected>Agosto</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- 3. Dia -->
+                                    <div>
+                                        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">DIA</label>
+                                        <select id="filterDia" onchange="renderMasterCanvas(activeModuleName)" class="w-full px-3 py-2 frosted-glass-input focus:outline-none focus:border-blue-500 cursor-pointer">
+                                            <option value="Todos">Todos</option>
+                                            <option value="1">01</option>
+                                            <option value="15">15</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- 4. Mídia -->
+                                    <div>
+                                        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">MÍDIA</label>
+                                        <select id="filterMidia" onchange="renderMasterCanvas(activeModuleName)" class="w-full px-3 py-2 frosted-glass-input focus:outline-none focus:border-blue-500 cursor-pointer">
+                                            <option value="Todas">Todas</option>
+                                            <option value="Google">Google Ads</option>
+                                            <option value="Meta">Meta Ads</option>
+                                            <option value="Linkedin">Linkedin Ads</option>
+                                            <option value="Organico">Orgânico</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <!-- 5. Campanha (Full Width) -->
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">CAMPANHA</label>
+                                    <select id="filterCampanha" onchange="renderMasterCanvas(activeModuleName)" class="w-full px-3 py-2 frosted-glass-input focus:outline-none focus:border-blue-500 cursor-pointer">
+                                        <option value="Todas">Todas as campanhas</option>
+                                        <option value="LeadGen">Lead Generation</option>
+                                        <option value="Institucional">Institucional</option>
+                                        <option value="Remarketing">Remarketing</option>
+                                    </select>
+                                </div>
+
+                                <!-- ACTIONS: LIMPAR + APLICAR -->
+                                <div class="flex items-center gap-2 pt-2 border-t border-slate-200/60">
+                                    <button onclick="resetFilters()" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200/90 text-slate-700 text-xs font-bold transition-all">
+                                        Limpar
+                                    </button>
+                                    <button onclick="toggleCanvasFilters(event)" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-black shadow-md shadow-blue-500/20 transition-all">
+                                        Aplicar
+                                    </button>
+                                </div>
+
+                            </div>
                         </div>
-                        <span class="px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-black" id="activeMetricBadge">
-                            Status: 100% Ativo
-                        </span>
+
+                        <!-- RIGHT: DYNAMIC FROSTED GLASS HASHTAG DROPDOWN PILL (FOR ALL MODULES) -->
+                        <div id="hashtagGlassDropdownContainer" class="relative z-40">
+                            <button id="hashtagGlassDropdownBtn" onclick="toggleHashtagGlassDropdown(event)" class="inline-flex items-center gap-3.5 px-6 py-2.5 rounded-full bg-blue-50/90 hover:bg-blue-100/90 border-2 border-blue-200/90 text-blue-600 font-extrabold text-sm shadow-sm transition-all duration-200 cursor-pointer group">
+                                <span id="selectedHashtagLabel" class="tracking-wide">Opção</span>
+                                <i data-lucide="chevron-down" id="hashtagGlassChevron" class="w-4 h-4 text-blue-600 group-hover:text-blue-800 transition-transform duration-200"></i>
+                            </button>
+
+                            <!-- THE EXACT FROSTED GLASS MASTER MENU APPLIED DYNAMICALLY -->
+                            <div id="hashtagGlassDropdownMenu" class="hidden absolute right-0 top-full mt-2.5 w-64 frosted-glass-style p-2.5 z-[100] text-left space-y-1.5">
+                                <!-- Dynamic Items will be rendered here -->
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="w-full h-80">
-                        <canvas id="activeMasterCanvas"></canvas>
+                    <!-- 2. MAIN CONTENT AREA: CHART (LEFT 9/12) + 4 METRIC TILES (RIGHT 3/12) -->
+                    <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-center flex-1 my-auto">
+                        
+                        <!-- LEFT AREA: TITLE HEADER & CHART -->
+                        <div class="xl:col-span-9 space-y-4">
+                            <!-- HEADER TITLE ROW -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest block" id="activeCategoryTag">MÓDULO 1 DE 5</span>
+                                    <h2 class="text-2xl font-black text-slate-900 mt-0.5" id="activeModuleNameDisplay">Visão Geral</h2>
+                                </div>
+                                <div class="px-3.5 py-1 rounded-full bg-emerald-100/90 text-emerald-800 border border-emerald-300 text-xs font-bold shadow-sm">
+                                    Status: 100% Ativo
+                                </div>
+                            </div>
+
+                            <!-- CHART CANVAS CONTAINER -->
+                            <div class="w-full h-80 pt-2">
+                                <canvas id="activeMasterCanvas"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT AREA: STACK OF 4 METRIC TILES -->
+                        <div class="xl:col-span-3 space-y-3">
+                            
+                            <!-- METRIC CARD 1 -->
+                            <div class="metric-tile-card">
+                                <span class="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider block mb-0.5 whitespace-nowrap" id="tile1Label">EFICIÊNCIA / ROAS</span>
+                                <div class="text-xl font-black text-blue-600 tracking-tight" id="rightTileRoas">6.91x</div>
+                            </div>
+
+                            <!-- METRIC CARD 2 -->
+                            <div class="metric-tile-card">
+                                <span class="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider block mb-0.5 whitespace-nowrap" id="tile2Label">VOLUME REGISTRADO</span>
+                                <div class="text-xl font-black text-slate-900 tracking-tight" id="rightTileLeads">12.450</div>
+                            </div>
+
+                            <!-- METRIC CARD 3 -->
+                            <div class="metric-tile-card">
+                                <span class="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider block mb-0.5 whitespace-nowrap" id="tile3Label">VARIAÇÃO MÊS</span>
+                                <div class="text-lg font-black text-emerald-600 tracking-tight" id="rightTileTrend1">+18.4% MoM</div>
+                            </div>
+
+                            <!-- METRIC CARD 4 -->
+                            <div class="metric-tile-card">
+                                <span class="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider block mb-0.5 whitespace-nowrap" id="tile4Label">CUSTO POR LEAD (CAC)</span>
+                                <div class="text-lg font-black text-purple-600 tracking-tight" id="rightTileTrend2">R$ 42,50</div>
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200" id="activeMetricDetails">
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Volume Registrado</span>
-                            <div class="text-xl font-black text-slate-900 mt-1" id="detailVal1">12.450</div>
-                        </div>
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Variação Mês</span>
-                            <div class="text-xl font-black text-emerald-700 mt-1" id="detailVal2">+18.4% MoM</div>
-                        </div>
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Eficiência / ROAS</span>
-                            <div class="text-xl font-black text-blue-700 mt-1" id="detailVal3">6.91x</div>
-                        </div>
+                    <!-- 3. BOTTOM RIBBON ACTION BUTTONS -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-100 mt-6">
+                        
+                        <!-- LEFT PURPLE BUTTON: Acesso completo (OPENS PROPORTIONAL FROSTED GLASS REPORT MODAL) -->
+                        <button onclick="openReportViewer(activeModuleName)" class="ribbon-btn ribbon-btn-purple">
+                            <span class="ribbon-accent-left"></span>
+                            <i data-lucide="external-link" class="w-4 h-4 text-white relative z-10"></i>
+                            <span class="relative z-10">Acesso completo</span>
+                            <span class="ribbon-accent-right"></span>
+                        </button>
+
+                        <!-- RIGHT DARK AI BUTTON: Falar com IA (OPENS PROPORTIONAL AI CHAT MODAL) -->
+                        <button onclick="openAiChatModal()" class="ribbon-btn ribbon-btn-dark group">
+                            <span class="ribbon-accent-left"></span>
+                            <i data-lucide="sparkles" class="w-4 h-4 text-white relative z-10 group-hover:rotate-12 transition-transform"></i>
+                            <span class="relative z-10">Falar com IA</span>
+                            <span class="ribbon-accent-right"></span>
+                        </button>
+
                     </div>
+
                 </div>
-
             </div>
 
         </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="max-w-7xl mx-auto px-4 lg:px-8 mt-16 pt-8 border-t-2 border-slate-300 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-black text-slate-800">
-        <div class="flex items-center gap-3">
-            <img src="assets/smartvision_logo_horizontal.png" alt="SMARTVISION" class="h-6 w-auto object-contain">
-            <span>•</span>
-            <span>Site Defender Protected</span>
-            <span>•</span>
-            <span>© 2026 SMARTVISION - Todos os direitos reservados.</span>
+    <!-- PERFECT EXACT FOOTER -->
+    <footer class="max-w-7xl mx-auto px-4 lg:px-8 mt-16 pt-6 pb-12 border-t border-slate-300 flex flex-col md:flex-row items-center justify-between gap-6">
+        <!-- LEFT: SMARTVISION LOGO -->
+        <div class="flex items-center">
+            <img src="assets/smartvision_logo_horizontal.png" alt="SMARTVISION" class="h-9 w-auto object-contain">
         </div>
-        <div class="flex items-center gap-6 font-black text-slate-900">
-            <span>Addsuite</span>
-            <span>•</span>
-            <span>new humans</span>
+
+        <!-- CENTER: COPYRIGHT NOTICE -->
+        <div class="text-xs font-black text-slate-700 tracking-tight text-center">
+            © 2026 SMARTVISION - Todos os direitos reservados.
+        </div>
+
+        <!-- RIGHT: SITE DEFENDER SELO | SEPARATOR | NEW HUMANS LOGO -->
+        <div class="flex items-center gap-4">
+            <!-- SITE DEFENDER SELO -->
+            <img src="assets/site_defender_selo.png" alt="SITE DEFENDER" class="h-7 w-auto object-contain">
+            
+            <!-- VERTICAL SEPARATOR LINE -->
+            <div class="w-px h-6 bg-slate-300"></div>
+
+            <!-- NEW HUMANS LOGO -->
+            <img src="assets/new_humans_group6.png" alt="new humans" class="h-7 w-auto object-contain">
         </div>
     </footer>
 
-    <!-- TABLEAU REPORT MODAL VIEWER -->
-    <div id="viewerOverlay" onclick="closeReportViewer()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-50"></div>
+    <!-- PROPORTIONAL FROSTED GLASS TABLEAU REPORT MODAL VIEWER (MATCHING Falar com IA POPUP DESIGN) -->
+    <div id="viewerOverlay" onclick="closeReportViewer()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 z-50"></div>
     
-    <div id="viewerModal" class="fixed top-6 left-6 right-6 bottom-6 bg-white shadow-2xl rounded-3xl scale-95 opacity-0 pointer-events-none transition-all duration-300 ease-out z-50 p-6 flex flex-col justify-between border-4 border-slate-300">
-        <div class="flex items-center justify-between pb-4 border-b-2 border-slate-200">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-blue-700 text-white flex items-center justify-center font-black shadow-md">
-                    <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
+    <div id="viewerModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[980px] h-[640px] max-h-[88vh] ai-modal-glass scale-95 opacity-0 pointer-events-none transition-all duration-300 ease-out z-50 flex flex-col overflow-hidden shadow-2xl">
+        
+        <!-- REPORT MODAL TOP BAR -->
+        <div class="px-5 py-3.5 border-b border-slate-200/80 bg-white/80 backdrop-blur-md flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-3.5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 text-white flex items-center justify-center shadow-md shadow-purple-500/20">
+                    <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h2 id="viewerTitle" class="text-xl font-black text-slate-900">Relatório Tableau Full Viz</h2>
-                    <p class="text-xs font-black text-blue-700">tableau.addintelligence.com.br • SMARTVISION Engine</p>
+                    <h2 id="viewerTitle" class="text-base font-black text-slate-900 tracking-tight">Plataforma de Inteligência de Vendas • Relatório Completo</h2>
+                    <p class="text-[11px] font-bold text-slate-500">tableau.addintelligence.com.br • SMARTVISION Full Viz</p>
                 </div>
             </div>
+            
             <div class="flex items-center gap-3">
-                <button onclick="alert('Exportando PDF completo do relatório...')" class="px-4 py-2 rounded-xl bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-black flex items-center gap-2 border border-blue-300 transition-colors">
-                    <i data-lucide="download" class="w-4 h-4"></i> Exportar PDF
+                <button onclick="alert('Exportando PDF completo em alta resolução...')" class="hidden sm:flex px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-black items-center gap-1.5 border border-blue-200 transition-colors">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i> Exportar PDF
                 </button>
-                <button onclick="closeReportViewer()" class="p-2.5 rounded-xl bg-slate-200 text-slate-800 hover:text-slate-950 transition-colors">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                
+                <button onclick="closeReportViewer()" class="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/90 text-slate-700 hover:text-slate-950 text-xs font-black flex items-center gap-1.5 transition-all">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    <span>VOLTAR</span>
                 </button>
             </div>
         </div>
 
-        <div class="my-4 flex-1 bg-slate-50 rounded-2xl border-2 border-slate-300 p-6 overflow-hidden flex flex-col justify-between">
-            <div class="w-full h-80">
-                <canvas id="modalChartCanvas"></canvas>
+        <!-- REPORT MODAL BODY: EXACT EMBEDDED HIGH-RES IMAGE AS REQUESTED -->
+        <div class="flex-1 bg-slate-100/70 p-4 overflow-y-auto no-scrollbar flex items-center justify-center">
+            <div class="w-full h-full bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-y-auto no-scrollbar p-2 flex items-start justify-center">
+                <img src="assets/relatorio_acesso_completo.png" alt="Relatório Completo - Plataforma de Inteligência de Vendas" class="w-full h-auto object-contain rounded-xl max-w-full">
             </div>
         </div>
+
+    </div>
+
+    <!-- PROPORTIONAL COMPACT AI ASSISTANT POPUP MODAL (CENTERED & ELEGANT) -->
+    <div id="aiModalOverlay" onclick="closeAiChatModal()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 z-50"></div>
+    
+    <div id="aiModalWindow" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[960px] h-[580px] max-h-[88vh] ai-modal-glass scale-95 opacity-0 pointer-events-none transition-all duration-300 ease-out z-50 flex flex-col overflow-hidden shadow-2xl">
+        
+        <!-- MODAL TOP BAR (COMPACT & PROPORTIONAL) -->
+        <div class="px-5 py-3.5 border-b border-slate-200/80 bg-white/75 backdrop-blur-md flex items-center justify-between shrink-0">
+            
+            <!-- LEFT BRAND & AGENT IDENTITY -->
+            <div class="flex items-center gap-3.5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h2 class="text-base font-black text-slate-900 tracking-tight" id="aiModalAgentTitle">Agente de Inteligência • Visão Geral</h2>
+                        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-extrabold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Online
+                        </span>
+                    </div>
+                    <p class="text-[11px] font-bold text-slate-500" id="aiModalSectionSubtitle">Perguntas & Respostas em tempo real</p>
+                </div>
+            </div>
+
+            <!-- RIGHT PERÍODO PILL & VOLTAR BUTTON -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-100 text-blue-700 text-[11px] font-extrabold">
+                    <i data-lucide="calendar" class="w-3 h-3"></i>
+                    <span id="aiModalDateRangeLabel">01/01/2026 – 01/09/2026</span>
+                </div>
+
+                <button onclick="closeAiChatModal()" class="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/90 text-slate-700 hover:text-slate-950 text-xs font-black flex items-center gap-1.5 transition-all">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    <span>VOLTAR</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- MODAL BODY: COMPACT LEFT SIDEBAR (310px) + RIGHT CHAT CONVERSATION -->
+        <div class="flex-1 flex overflow-hidden">
+            
+            <!-- LEFT SUGGESTED QUESTIONS SIDEBAR (FIXED COMPACT 310PX WIDTH) -->
+            <div class="w-[310px] shrink-0 ai-sidebar-glass p-4 flex flex-col justify-between overflow-y-auto no-scrollbar" id="aiQuestionsSidebar">
+                
+                <div>
+                    <!-- TOGGLE HEADER -->
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-200/70 mb-3">
+                        <div class="flex items-center gap-1.5">
+                            <i data-lucide="help-circle" class="w-3.5 h-3.5 text-blue-600"></i>
+                            <span class="text-[11px] font-black text-slate-800 uppercase tracking-wider">Perguntas Sugeridas</span>
+                        </div>
+                        <span class="text-[10px] font-extrabold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full" id="aiQuestionCountBadge">4 perguntas</span>
+                    </div>
+
+                    <!-- SEARCH INPUT -->
+                    <div class="relative mb-3">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                        <input type="text" id="aiQuestionSearchInput" oninput="filterSuggestedQuestions()" placeholder="Pesquisar pergunta..." class="w-full pl-9 pr-3 py-2 rounded-xl bg-white/90 border border-slate-200 text-[11px] font-bold text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-sm">
+                    </div>
+
+                    <!-- QUESTIONS PILL LIST -->
+                    <div class="space-y-2" id="aiQuestionsListContainer">
+                        <!-- Questions dynamically loaded -->
+                    </div>
+                </div>
+
+                <!-- SIDEBAR FOOTER NOTE -->
+                <div class="mt-4 pt-3 border-t border-slate-200/70 flex items-center gap-2 text-slate-400 text-[11px] font-bold">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i>
+                    <span>Clique para resposta instantânea.</span>
+                </div>
+
+            </div>
+
+            <!-- RIGHT CHAT CONVERSATION AREA -->
+            <div class="flex-1 bg-white/70 p-5 flex flex-col justify-between overflow-hidden">
+                
+                <!-- CHAT MESSAGES SCROLLABLE STREAM -->
+                <div class="flex-1 overflow-y-auto space-y-3.5 pr-2 no-scrollbar mb-3" id="aiChatStreamContainer">
+                    
+                    <!-- INITIAL WELCOME AI BUBBLE -->
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-rose-500 to-indigo-600 text-white flex items-center justify-center font-bold shadow-sm shrink-0 mt-0.5">
+                            <i data-lucide="bot" class="w-4 h-4"></i>
+                        </div>
+                        <div class="chat-bubble-ai p-3.5 max-w-xl text-left">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs font-black text-slate-900">Assistente SMARTVISION</span>
+                                <span class="text-[9.5px] font-bold text-slate-400">Agora</span>
+                            </div>
+                            <p class="text-xs font-bold text-slate-700 leading-relaxed" id="aiWelcomeMessageText">
+                                Olá! Sou seu copiloto de Inteligência de Negócios. Estou conectado aos dados de <strong class="text-blue-600">Visão Geral</strong>. Escolha uma das perguntas sugeridas ao lado ou digite sua dúvida para obter insights instantâneos!
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CHAT BOTTOM INPUT BAR (COMPACT & MODERN) -->
+                <div class="pt-2.5 border-t border-slate-200/80">
+                    <form onsubmit="handleSendAiMessage(event)" class="flex items-center gap-2.5">
+                        <div class="relative flex-1">
+                            <input type="text" id="aiChatInput" placeholder="Faça uma pergunta sobre este painel..." class="w-full pl-4 pr-10 py-2.5 rounded-xl bg-white border-2 border-slate-200 text-xs font-bold text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-600 transition-all shadow-sm">
+                        </div>
+                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/20 transition-all hover:scale-[1.02] cursor-pointer">
+                            <span>Enviar</span>
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
     <!-- JAVASCRIPT -->
     <script>
         lucide.createIcons();
 
-        let activeModuleName = "Visão Geral";
+        let activeModuleName = localStorage.getItem('smartvision_active_module_name') || "Visão Geral";
+        let activeVisaoHashtag = localStorage.getItem('smartvision_active_visao_hashtag') || "Resumo Executivo";
+        let activeLeadsHashtag = localStorage.getItem('smartvision_active_leads_hashtag') || "Leads Recebidos";
+        let activeConversionHashtag = localStorage.getItem('smartvision_active_conversion_hashtag') || "Conversões";
+        let activeMidiaHashtag = localStorage.getItem('smartvision_active_midia_hashtag') || "Google";
+        let activeConteudoHashtag = localStorage.getItem('smartvision_active_conteudo_hashtag') || "Publicações";
         let masterChartObj = null;
 
-        // Client Selector
-        const clientBtn = document.getElementById('clientDropdownBtn');
-        const clientMenu = document.getElementById('clientDropdownMenu');
-        clientBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            clientMenu.classList.toggle('hidden');
-        });
-        document.addEventListener('click', () => clientMenu.classList.add('hidden'));
+        // Hashtags definitions per module
+        const moduleHashtagsConfig = {
+            'Visão Geral': ['Resumo Executivo', 'Principais Indicadores', 'Metas', 'Resultados', 'Comparativo Mensal'],
+            'Leads e Vendas': ['Leads Recebidos', 'Leads Aceitos', 'Leads Qualificados', 'Leads Fechados', 'Funil de Vendas'],
+            'Conversão e Performance': ['Conversões', 'Taxa de Conversão'],
+            'Mídia Paga': ['Google', 'Instagram', 'Facebook', 'TikTok', 'LinkedIn', 'Investimentos'],
+            'Conteúdo e Site': ['Publicações', 'Tráfego', 'Visitantes', 'Páginas Mais Visitadas', 'Origem do Tráfego', 'Engajamento']
+        };
 
-        function selectClient(name) {
-            document.getElementById('currentClientName').innerText = name;
-            clientMenu.classList.add('hidden');
+        // Module-specific questions & AI responses database
+        const moduleAiQuestionsDatabase = {
+            'Visão Geral': [
+                {
+                    q: 'Visão geral dos dados e performance executiva',
+                    a: `<strong>Segue o resumo executivo dos dados consolidados:</strong><br><br>
+                    • <strong>Receita Total:</strong> R$ 1,48M (+18.4% MoM)<br>
+                    • <strong>Volume Total de Leads:</strong> 12.450 leads gerados<br>
+                    • <strong>Taxa Média de Conversão:</strong> 4.85% (Superando a meta de 4.2%)<br>
+                    • <strong>ROAS Global Consolidado:</strong> 6.91x<br>
+                    • <strong>Eficiência de Canais:</strong> 100% ativo com estabilidade máxima.`
+                },
+                {
+                    q: 'Análise de atingimento de metas e gap financeiro',
+                    a: `<strong>Status atual de metas para o período:</strong><br><br>
+                    • <strong>Meta Fixada:</strong> R$ 1,35M<br>
+                    • <strong>Realizado Atual:</strong> R$ 1,48M (<strong>108.4% de atingimento</strong>)<br>
+                    • <strong>Superação positiva (Gap):</strong> +R$ 130.000 acima do planejado.<br>
+                    • <strong>Recomendação IA:</strong> Manter investimento nos canais de maior tração para consolidar o recorde trimestral.`
+                },
+                {
+                    q: 'Evolução de faturamento e margem líquida',
+                    a: `<strong>Diagnóstico de rentabilidade operacional:</strong><br><br>
+                    • <strong>Lucro Líquido Operacional:</strong> R$ 684.000<br>
+                    • <strong>Margem Líquida:</strong> 46.2%<br>
+                    • <strong>Retorno sobre Investimento (ROI):</strong> 312%<br>
+                    • <strong>LTV Médio por Cliente:</strong> R$ 1.840.`
+                },
+                {
+                    q: 'Comparativo mensal YoY e histórico anual',
+                    a: `<strong>Comparativo com o mesmo período do ano anterior:</strong><br><br>
+                    • <strong>Crescimento YoY:</strong> +24.6% em relação a 2025<br>
+                    • <strong>Variação no mês:</strong> +18.4% MoM<br>
+                    • <strong>Previsão de fechamento para o próximo mês:</strong> R$ 1,62M.`
+                }
+            ],
+            'Leads e Vendas': [
+                {
+                    q: 'Análise de conversão do funil de vendas completo',
+                    a: `<strong>Mapeamento detalhado do funil de vendas:</strong><br><br>
+                    • <strong>1. Leads Recebidos:</strong> 12.450 (100%)<br>
+                    • <strong>2. Leads Aceitos pelo SDR:</strong> 9.820 (78.9%)<br>
+                    • <strong>3. Leads Qualificados (SQL):</strong> 6.410 (51.5%)<br>
+                    • <strong>4. Leads Fechados (Clientes):</strong> 3.250 (26.1%)<br>
+                    • <strong>Taxa Geral de Conversão do Funil:</strong> 14.8%.`
+                },
+                {
+                    q: 'Custo de aquisição por lead fechado (CAC)',
+                    a: `<strong>Eficiência de custos e CAC por etapa:</strong><br><br>
+                    • <strong>CPL Médio (Recebidos):</strong> R$ 42,50<br>
+                    • <strong>Custo por Lead Qualificado:</strong> R$ 51,00<br>
+                    • <strong>CAC Final por Venda Fechada:</strong> R$ 120,00<br>
+                    • <strong>ROAS por Contrato Fechado:</strong> 9.40x.`
+                },
+                {
+                    q: 'Volume e taxa de perda nas etapas do funil',
+                    a: `<strong>Gargalos e taxas de perda identificados:</strong><br><br>
+                    • <strong>Perda entre Recebido e Aceito:</strong> 21.1% (Principal motivo: dados de contato inválidos)<br>
+                    • <strong>Perda entre Aceito e Qualificado:</strong> 34.7% (Motivo: perfil fora do ICP)<br>
+                    • <strong>Recomendação IA:</strong> Otimizar os filtros de formulário nas campanhas para elevar o score do lead logo na entrada.`
+                }
+            ],
+            'Conversão e Performance': [
+                {
+                    q: 'Análise da taxa de conversão global e canais',
+                    a: `<strong>Performance de conversão detalhada:</strong><br><br>
+                    • <strong>Taxa Global Atual:</strong> 4.85% (Meta: 4.20%)<br>
+                    • <strong>Total de Conversões Concluídas:</strong> 8.650<br>
+                    • <strong>Crescimento no período:</strong> +0.65% p.p. vs mês anterior<br>
+                    • <strong>Canal com maior conversão:</strong> Orgânico/Direto com 6.40%.`
+                },
+                {
+                    q: 'Gargalos de conversão e pontos de fricção',
+                    a: `<strong>Diagnóstico de fricção e abandono:</strong><br><br>
+                    • <strong>Taxa de saída no checkout:</strong> 18.2%<br>
+                    • <strong>Tempo de carregamento médio:</strong> 1.4s (Excelente)<br>
+                    • <strong>Recomendação IA:</strong> Implementar checkout em 1 clique e botões com preenchimento automático para elevar a conversão em +12%.`
+                }
+            ],
+            'Mídia Paga': [
+                {
+                    q: 'Comparativo de ROAS e eficiência por plataforma',
+                    a: `<strong>Ranking de eficiência de Mídia Paga:</strong><br><br>
+                    • <strong>1. LinkedIn Ads:</strong> ROAS 9.20x • CAC R$ 88,50 (Maior ticket médio)<br>
+                    • <strong>2. TikTok Ads:</strong> ROAS 8.40x • CAC R$ 28,90 (+35.2% de crescimento)<br>
+                    • <strong>3. Google Ads:</strong> ROAS 7.85x • CAC R$ 34,50 (6.420 leads)<br>
+                    • <strong>4. Instagram Ads:</strong> ROAS 6.20x • CAC R$ 41,20 (3.850 leads)<br>
+                    • <strong>5. Facebook Ads:</strong> ROAS 5.80x • CAC R$ 46,00 (2.940 leads).`
+                },
+                {
+                    q: 'Análise de orçamento total e retorno gerado',
+                    a: `<strong>Balanço de Investimento em Mídia:</strong><br><br>
+                    • <strong>Total Investido:</strong> R$ 214.500<br>
+                    • <strong>Retorno Gerado Direto:</strong> R$ 1.590.000<br>
+                    • <strong>ROAS Consolidado:</strong> 7.45x<br>
+                    • <strong>Recomendação IA:</strong> Aumentar a verba do Google e LinkedIn em +15% para capturar demanda reprimida.`
+                }
+            ],
+            'Conteúdo e Site': [
+                {
+                    q: 'Top páginas mais visitadas e comportamento de tráfego',
+                    a: `<strong>Relatório de tráfego e engajamento:</strong><br><br>
+                    • <strong>Página #1:</strong> <code>/home</code> (412.000 visualizações • 6.20% conversão)<br>
+                    • <strong>Sessões Totais:</strong> 184.200 sessões (+19.8% MoM)<br>
+                    • <strong>Tempo Médio na Página:</strong> 3m 42s<br>
+                    • <strong>Taxa de Rejeição Global:</strong> 38.4% (Abaixo da média de mercado).`
+                },
+                {
+                    q: 'Publicações com maior taxa de engajamento e alcance',
+                    a: `<strong>Métricas de Conteúdo e Social:</strong><br><br>
+                    • <strong>Total de Publicações:</strong> 142 posts ativos<br>
+                    • <strong>Alcance Orgânico Total:</strong> 385.400 contas impactadas<br>
+                    • <strong>Taxa de Engajamento Média:</strong> 5.85%<br>
+                    • <strong>Compartilhamentos:</strong> 14.200 • Salvos: 8.940.`
+                }
+            ]
+        };
+
+        // OPEN AI CHAT MODAL
+        function openAiChatModal() {
+            const overlay = document.getElementById('aiModalOverlay');
+            const modal = document.getElementById('aiModalWindow');
+            const agentTitle = document.getElementById('aiModalAgentTitle');
+            const sectionSubtitle = document.getElementById('aiModalSectionSubtitle');
+            const welcomeText = document.getElementById('aiWelcomeMessageText');
+
+            if (agentTitle) agentTitle.innerText = `Agente de Inteligência • ${activeModuleName}`;
+            if (sectionSubtitle) sectionSubtitle.innerText = `Análise e diagnósticos preditivos para ${activeModuleName}`;
+            if (welcomeText) welcomeText.innerHTML = `Olá! Sou seu copiloto de Inteligência de Negócios. Estou conectado aos dados de <strong class="text-blue-600">${activeModuleName}</strong>. Escolha uma das perguntas sugeridas ao lado ou digite sua dúvida para obter insights instantâneos!`;
+
+            loadSuggestedQuestionsForModule(activeModuleName);
+
+            if (overlay && modal) {
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+            }
         }
 
-        // Load Specific Module View dynamically for all 13 items
-        function loadModuleView(name, id) {
-            activeModuleName = name;
-            document.getElementById('activeModuleNameDisplay').innerText = name;
-            document.getElementById('activeCategoryTag').innerText = `Módulo ${id} de 13`;
-
-            // Active button highlights
-            for (let i = 1; i <= 13; i++) {
-                const btn = document.getElementById(`dock-item-${i}`);
-                if (btn) btn.classList.remove('dock-item-active');
+        function closeAiChatModal() {
+            const overlay = document.getElementById('aiModalOverlay');
+            const modal = document.getElementById('aiModalWindow');
+            if (overlay && modal) {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                modal.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
             }
-            const activeBtn = document.getElementById(`dock-item-${id}`);
-            if (activeBtn) activeBtn.classList.add('dock-item-active');
+        }
 
-            // Update Master Canvas Chart
-            renderMasterCanvas(name);
+        // LOAD QUESTIONS INTO SIDEBAR
+        function loadSuggestedQuestionsForModule(moduleName) {
+            const container = document.getElementById('aiQuestionsListContainer');
+            const badge = document.getElementById('aiQuestionCountBadge');
+            const questions = moduleAiQuestionsDatabase[moduleName] || moduleAiQuestionsDatabase['Visão Geral'];
+
+            if (badge) badge.innerText = `${questions.length} perguntas`;
+            if (!container) return;
+
+            container.innerHTML = questions.map((item, idx) => `
+                <button type="button" onclick="triggerSuggestedQuestion(${idx})" class="ai-question-pill-btn group">
+                    <span class="w-5 h-5 rounded-md bg-blue-100/80 group-hover:bg-blue-600 text-blue-700 group-hover:text-white flex items-center justify-center text-[10px] font-black transition-colors shrink-0">${idx + 1}</span>
+                    <span class="flex-1 text-left leading-snug">${item.q}</span>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all shrink-0"></i>
+                </button>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function filterSuggestedQuestions() {
+            const query = document.getElementById('aiQuestionSearchInput').value.toLowerCase();
+            const buttons = document.querySelectorAll('.ai-question-pill-btn');
+            buttons.forEach(btn => {
+                const text = btn.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    btn.style.display = 'flex';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+        }
+
+        function triggerSuggestedQuestion(idx) {
+            const questions = moduleAiQuestionsDatabase[activeModuleName] || moduleAiQuestionsDatabase['Visão Geral'];
+            const item = questions[idx];
+            if (!item) return;
+
+            postUserAndAiMessage(item.q, item.a);
+        }
+
+        function handleSendAiMessage(e) {
+            if (e) e.preventDefault();
+            const input = document.getElementById('aiChatInput');
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            input.value = '';
+
+            // Generate smart response based on user input
+            const customAnswer = `<strong>Análise de IA para a consulta "${userText}":</strong><br><br>
+            • <strong>Base de Dados Analisada:</strong> Módulo <em>${activeModuleName}</em> (Período: 01/01/2026 – 01/09/2026).<br>
+            • <strong>Diagnóstico Estatístico:</strong> Os indicadores para este critério demonstram consistência de +18.4% acima da média histórica.<br>
+            • <strong>Ação Recomendada:</strong> Focar na otimização dos canais de maior conversão e manter o monitoramento contínuo das metas no painel executivo.`;
+
+            postUserAndAiMessage(userText, customAnswer);
+        }
+
+        function postUserAndAiMessage(question, answer) {
+            const stream = document.getElementById('aiChatStreamContainer');
+            if (!stream) return;
+
+            // 1. User Message
+            const userMsgHtml = `
+                <div class="flex items-start justify-end gap-2.5">
+                    <div class="chat-bubble-user p-3 max-w-md text-left">
+                        <p class="text-xs font-bold leading-relaxed">${question}</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold shadow-sm shrink-0 mt-0.5">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                    </div>
+                </div>
+            `;
+            stream.insertAdjacentHTML('beforeend', userMsgHtml);
+
+            // 2. Typing indicator then AI Message
+            const typingId = 'typing_' + Date.now();
+            const typingHtml = `
+                <div id="${typingId}" class="flex items-start gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-rose-500 to-indigo-600 text-white flex items-center justify-center font-bold shadow-sm shrink-0 mt-0.5">
+                        <i data-lucide="bot" class="w-4 h-4"></i>
+                    </div>
+                    <div class="chat-bubble-ai p-3 text-xs font-bold text-slate-500 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
+                        <span>SMARTVISION IA analisando...</span>
+                    </div>
+                </div>
+            `;
+            stream.insertAdjacentHTML('beforeend', typingHtml);
+            stream.scrollTop = stream.scrollHeight;
+            lucide.createIcons();
+
+            setTimeout(() => {
+                const typingEl = document.getElementById(typingId);
+                if (typingEl) typingEl.remove();
+
+                const aiMsgHtml = `
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-rose-500 to-indigo-600 text-white flex items-center justify-center font-bold shadow-sm shrink-0 mt-0.5">
+                            <i data-lucide="bot" class="w-4 h-4"></i>
+                        </div>
+                        <div class="chat-bubble-ai p-3.5 max-w-lg text-left">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs font-black text-slate-900">Assistente SMARTVISION</span>
+                                <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">Concluído</span>
+                            </div>
+                            <div class="text-xs font-medium text-slate-700 leading-relaxed">${answer}</div>
+                        </div>
+                    </div>
+                `;
+                stream.insertAdjacentHTML('beforeend', aiMsgHtml);
+                stream.scrollTop = stream.scrollHeight;
+                lucide.createIcons();
+            }, 550);
+        }
+
+        // Dedicated Frosted Glass Filter Dropdown Toggle (Zero Layout Shift)
+        function toggleCanvasFilters(e) {
+            if (e) e.stopPropagation();
+            const filterMenu = document.getElementById('filterGlassMenu');
+            const chevron = document.getElementById('filterChevronIcon');
+            if (filterMenu) {
+                const isHidden = filterMenu.classList.contains('hidden');
+                if (isHidden) {
+                    filterMenu.classList.remove('hidden');
+                    if (chevron) chevron.classList.add('rotate-180');
+                } else {
+                    filterMenu.classList.add('hidden');
+                    if (chevron) chevron.classList.remove('rotate-180');
+                }
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('filterAno').value = '2026';
+            document.getElementById('filterMes').value = 'Ago';
+            document.getElementById('filterDia').value = 'Todos';
+            document.getElementById('filterMidia').value = 'Todas';
+            document.getElementById('filterCampanha').value = 'Todas';
+            renderMasterCanvas(activeModuleName);
+        }
+
+        // Glassmorphism Hashtag Dropdown Controls
+        function toggleHashtagGlassDropdown(e) {
+            if (e) e.stopPropagation();
+            const menu = document.getElementById('hashtagGlassDropdownMenu');
+            const chevron = document.getElementById('hashtagGlassChevron');
+            if (menu) {
+                const isHidden = menu.classList.contains('hidden');
+                if (isHidden) {
+                    menu.classList.remove('hidden');
+                    if (chevron) chevron.classList.add('rotate-180');
+                } else {
+                    menu.classList.add('hidden');
+                    if (chevron) chevron.classList.remove('rotate-180');
+                }
+            }
+        }
+
+        // Global outside click listener to close dropdowns cleanly
+        document.addEventListener('click', (e) => {
+            // 1. Hashtags Dropdown
+            const dropdownContainer = document.getElementById('hashtagGlassDropdownContainer');
+            const menu = document.getElementById('hashtagGlassDropdownMenu');
+            const chevron = document.getElementById('hashtagGlassChevron');
+            if (menu && dropdownContainer && !dropdownContainer.contains(e.target)) {
+                menu.classList.add('hidden');
+                if (chevron) chevron.classList.remove('rotate-180');
+            }
+
+            // 2. Filter Glass Menu
+            const filterContainer = document.getElementById('filterDropdownContainer');
+            const filterMenu = document.getElementById('filterGlassMenu');
+            const filterChevron = document.getElementById('filterChevronIcon');
+            if (filterMenu && filterContainer && !filterContainer.contains(e.target)) {
+                filterMenu.classList.add('hidden');
+                if (filterChevron) filterChevron.classList.remove('rotate-180');
+            }
+        });
+
+        // Render dynamic glass dropdown items based on active module
+        function renderHashtagDropdownItems(moduleName, selectedTag) {
+            const menu = document.getElementById('hashtagGlassDropdownMenu');
+            const tags = moduleHashtagsConfig[moduleName] || [];
+            if (!menu) return;
+
+            menu.innerHTML = tags.map(tag => `
+                <button onclick="selectGlassHashtag('${tag}')" class="frosted-glass-item ${tag === selectedTag ? 'active-glass-item' : ''}">
+                    <span>${tag}</span>
+                    <i data-lucide="check" class="w-4 h-4 text-blue-600 check-icon ${tag === selectedTag ? 'opacity-100' : 'opacity-0'}"></i>
+                </button>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function selectGlassHashtag(tagName, shouldRender = true) {
+            const labelEl = document.getElementById('selectedHashtagLabel');
+            if (labelEl) labelEl.innerText = tagName;
+            
+            const menu = document.getElementById('hashtagGlassDropdownMenu');
+            const chevron = document.getElementById('hashtagGlassChevron');
+            if (menu) menu.classList.add('hidden');
+            if (chevron) chevron.classList.remove('rotate-180');
+
+            if (activeModuleName === 'Visão Geral') {
+                activeVisaoHashtag = tagName;
+                localStorage.setItem('smartvision_active_visao_hashtag', tagName);
+
+                // Metric tiles update for Visão Geral
+                if (tagName === 'Resumo Executivo') {
+                    document.getElementById('rightTileRoas').innerText = '6.91x';
+                    document.getElementById('rightTileLeads').innerText = '12.450';
+                    document.getElementById('rightTileTrend1').innerText = '+18.4% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 42,50';
+                } else if (tagName === 'Principais Indicadores') {
+                    document.getElementById('rightTileRoas').innerText = '94.8% Score';
+                    document.getElementById('rightTileLeads').innerText = 'R$ 1,48M';
+                    document.getElementById('rightTileTrend1').innerText = '+21.5% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 1.840 LTV';
+                } else if (tagName === 'Metas') {
+                    document.getElementById('rightTileRoas').innerText = '108.4% Meta';
+                    document.getElementById('rightTileLeads').innerText = 'R$ 1,35M Plan.';
+                    document.getElementById('rightTileTrend1').innerText = '+8.4% Superação';
+                    document.getElementById('rightTileTrend2').innerText = '+R$ 130K Gap';
+                } else if (tagName === 'Resultados') {
+                    document.getElementById('rightTileRoas').innerText = 'R$ 684.000';
+                    document.getElementById('rightTileLeads').innerText = '46.2% Margem';
+                    document.getElementById('rightTileTrend1').innerText = '+19.2% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '312% ROI';
+                } else if (tagName === 'Comparativo Mensal') {
+                    document.getElementById('rightTileRoas').innerText = '+24.6% YoY';
+                    document.getElementById('rightTileLeads').innerText = '+18.4% MoM';
+                    document.getElementById('rightTileTrend1').innerText = 'Recorde Histórico';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 1,62M Prev.';
+                }
+
+                renderHashtagDropdownItems('Visão Geral', tagName);
+
+                if (shouldRender) {
+                    renderMasterCanvas(`Visão Geral - ${tagName}`);
+                }
+            } else if (activeModuleName === 'Leads e Vendas') {
+                activeLeadsHashtag = tagName;
+                localStorage.setItem('smartvision_active_leads_hashtag', tagName);
+
+                // Metric tiles update for Leads e Vendas
+                if (tagName === 'Leads Recebidos') {
+                    document.getElementById('rightTileRoas').innerText = '6.91x';
+                    document.getElementById('rightTileLeads').innerText = '12.450';
+                    document.getElementById('rightTileTrend1').innerText = '+18.4% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 42,50';
+                } else if (tagName === 'Leads Aceitos') {
+                    document.getElementById('rightTileRoas').innerText = '7.20x';
+                    document.getElementById('rightTileLeads').innerText = '9.820';
+                    document.getElementById('rightTileTrend1').innerText = '+21.2% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 38,90';
+                } else if (tagName === 'Leads Qualificados') {
+                    document.getElementById('rightTileRoas').innerText = '8.15x';
+                    document.getElementById('rightTileLeads').innerText = '6.410';
+                    document.getElementById('rightTileTrend1').innerText = '+14.8% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 51,00';
+                } else if (tagName === 'Leads Fechados') {
+                    document.getElementById('rightTileRoas').innerText = '9.40x';
+                    document.getElementById('rightTileLeads').innerText = '3.250';
+                    document.getElementById('rightTileTrend1').innerText = '+29.5% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 120,00';
+                } else if (tagName === 'Funil de Vendas') {
+                    document.getElementById('rightTileRoas').innerText = '14.8%';
+                    document.getElementById('rightTileLeads').innerText = '31.930';
+                    document.getElementById('rightTileTrend1').innerText = '+18.4% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '6.91x ROAS';
+                }
+
+                renderHashtagDropdownItems('Leads e Vendas', tagName);
+
+                if (shouldRender) {
+                    renderMasterCanvas(`Leads e Vendas - ${tagName}`);
+                }
+            } else if (activeModuleName === 'Conversão e Performance') {
+                activeConversionHashtag = tagName;
+                localStorage.setItem('smartvision_active_conversion_hashtag', tagName);
+
+                // Metric tiles update for Conversão e Performance
+                if (tagName === 'Conversões') {
+                    document.getElementById('rightTileRoas').innerText = '5.42x';
+                    document.getElementById('rightTileLeads').innerText = '8.650';
+                    document.getElementById('rightTileTrend1').innerText = '+16.8% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 48,20';
+                } else if (tagName === 'Taxa de Conversão') {
+                    document.getElementById('rightTileRoas').innerText = '4.85%';
+                    document.getElementById('rightTileLeads').innerText = 'Meta 4.2%';
+                    document.getElementById('rightTileTrend1').innerText = '+0.65% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '12.450 Leads';
+                }
+
+                renderHashtagDropdownItems('Conversão e Performance', tagName);
+
+                if (shouldRender) {
+                    renderMasterCanvas(`Conversão e Performance - ${tagName}`);
+                }
+            } else if (activeModuleName === 'Mídia Paga') {
+                activeMidiaHashtag = tagName;
+                localStorage.setItem('smartvision_active_midia_hashtag', tagName);
+
+                // Metric tiles update for Mídia Paga
+                if (tagName === 'Google') {
+                    document.getElementById('rightTileRoas').innerText = '7.85x';
+                    document.getElementById('rightTileLeads').innerText = '6.420';
+                    document.getElementById('rightTileTrend1').innerText = '+22.4% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 34,50';
+                } else if (tagName === 'Instagram') {
+                    document.getElementById('rightTileRoas').innerText = '6.20x';
+                    document.getElementById('rightTileLeads').innerText = '3.850';
+                    document.getElementById('rightTileTrend1').innerText = '+18.9% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 41,20';
+                } else if (tagName === 'Facebook') {
+                    document.getElementById('rightTileRoas').innerText = '5.80x';
+                    document.getElementById('rightTileLeads').innerText = '2.940';
+                    document.getElementById('rightTileTrend1').innerText = '+12.5% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 46,00';
+                } else if (tagName === 'TikTok') {
+                    document.getElementById('rightTileRoas').innerText = '8.40x';
+                    document.getElementById('rightTileLeads').innerText = '4.120';
+                    document.getElementById('rightTileTrend1').innerText = '+35.2% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 28,90';
+                } else if (tagName === 'LinkedIn') {
+                    document.getElementById('rightTileRoas').innerText = '9.20x';
+                    document.getElementById('rightTileLeads').innerText = '1.850';
+                    document.getElementById('rightTileTrend1').innerText = '+28.0% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 88,50';
+                } else if (tagName === 'Investimentos') {
+                    document.getElementById('rightTileRoas').innerText = '7.45x';
+                    document.getElementById('rightTileLeads').innerText = 'R$ 214.500';
+                    document.getElementById('rightTileTrend1').innerText = '+14.2% MoM';
+                    document.getElementById('rightTileTrend2').innerText = 'R$ 1.59M Retorno';
+                }
+
+                renderHashtagDropdownItems('Mídia Paga', tagName);
+
+                if (shouldRender) {
+                    renderMasterCanvas(`Mídia Paga - ${tagName}`);
+                }
+            } else if (activeModuleName === 'Conteúdo e Site') {
+                activeConteudoHashtag = tagName;
+                localStorage.setItem('smartvision_active_conteudo_hashtag', tagName);
+
+                // Metric tiles update for Conteúdo e Site
+                if (tagName === 'Publicações') {
+                    document.getElementById('rightTileRoas').innerText = '142 Posts';
+                    document.getElementById('rightTileLeads').innerText = '385.400';
+                    document.getElementById('rightTileTrend1').innerText = '+24.5% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '4.92% Engajamento';
+                } else if (tagName === 'Tráfego') {
+                    document.getElementById('rightTileRoas').innerText = '184.200 Sessões';
+                    document.getElementById('rightTileLeads').innerText = '142.800';
+                    document.getElementById('rightTileTrend1').innerText = '+19.8% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '3m 42s Médio';
+                } else if (tagName === 'Visitantes') {
+                    document.getElementById('rightTileRoas').innerText = '98.400 Novos';
+                    document.getElementById('rightTileLeads').innerText = '44.400 Recor.';
+                    document.getElementById('rightTileTrend1').innerText = '+15.2% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '38.4% Rejeição';
+                } else if (tagName === 'Páginas Mais Visitadas') {
+                    document.getElementById('rightTileRoas').innerText = '/home Top 1';
+                    document.getElementById('rightTileLeads').innerText = '412.000 Views';
+                    document.getElementById('rightTileTrend1').innerText = '+28.4% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '6.20% Conv.';
+                } else if (tagName === 'Origem do Tráfego') {
+                    document.getElementById('rightTileRoas').innerText = '48% Orgânico';
+                    document.getElementById('rightTileLeads').innerText = '52% Social/Dir.';
+                    document.getElementById('rightTileTrend1').innerText = '+21.0% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '320 Domínios';
+                } else if (tagName === 'Engajamento') {
+                    document.getElementById('rightTileRoas').innerText = '5.85% Taxa';
+                    document.getElementById('rightTileLeads').innerText = '14.200 Shares';
+                    document.getElementById('rightTileTrend1').innerText = '+32.6% MoM';
+                    document.getElementById('rightTileTrend2').innerText = '8.940 Salvos';
+                }
+
+                renderHashtagDropdownItems('Conteúdo e Site', tagName);
+
+                if (shouldRender) {
+                    renderMasterCanvas(`Conteúdo e Site - ${tagName}`);
+                }
+            }
+        }
+
+        // Painéis de Controle module loader with State Persistence in localStorage
+        function loadPaineisModule(name, id) {
+            activeModuleName = name;
+            localStorage.setItem('smartvision_active_module_name', name);
+            localStorage.setItem('smartvision_active_module_id', id);
+
+            const glassDropdown = document.getElementById('hashtagGlassDropdownContainer');
+            if (glassDropdown) glassDropdown.classList.remove('hidden');
+
+            document.getElementById('activeModuleNameDisplay').innerText = name;
+            document.getElementById('activeCategoryTag').innerText = `MÓDULO ${id} DE 5`;
+
+            if (name === 'Visão Geral') {
+                selectGlassHashtag(activeVisaoHashtag, true);
+            } else if (name === 'Leads e Vendas') {
+                selectGlassHashtag(activeLeadsHashtag, true);
+            } else if (name === 'Conversão e Performance') {
+                selectGlassHashtag(activeConversionHashtag, true);
+            } else if (name === 'Mídia Paga') {
+                selectGlassHashtag(activeMidiaHashtag, true);
+            } else if (name === 'Conteúdo e Site') {
+                selectGlassHashtag(activeConteudoHashtag, true);
+            }
+
+            // Update active state in Painéis de Controle buttons
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`paineis-item-${i}`);
+                if (btn) btn.classList.remove('active-paineis-item');
+            }
+            const activeBtn = document.getElementById(`paineis-item-${id}`);
+            if (activeBtn) activeBtn.classList.add('active-paineis-item');
+        }
+
+        // Date Range Picker Dropdown Toggle & Controls
+        const datePickerBtn = document.getElementById('dateRangePickerBtn');
+        const dateDropdown = document.getElementById('dateRangeDropdown');
+        const dateChevron = document.getElementById('dateChevron');
+
+        function toggleDateRangeDropdown() {
+            if (!dateDropdown) return;
+            const isHidden = dateDropdown.classList.contains('hidden');
+            if (isHidden) {
+                dateDropdown.classList.remove('hidden');
+                if (dateChevron) dateChevron.classList.add('rotate-180');
+            } else {
+                dateDropdown.classList.add('hidden');
+                if (dateChevron) dateChevron.classList.remove('rotate-180');
+            }
+        }
+
+        if (datePickerBtn) {
+            datePickerBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleDateRangeDropdown();
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (dateDropdown && !dateDropdown.contains(e.target) && !datePickerBtn.contains(e.target)) {
+                dateDropdown.classList.add('hidden');
+                if (dateChevron) dateChevron.classList.remove('rotate-180');
+            }
+        });
+
+        function setPresetDateRange(days) {
+            const endDate = new Date();
+            const startDate = new Date();
+            startDate.setDate(endDate.getDate() - days);
+
+            document.getElementById('endDateInput').value = endDate.toISOString().split('T')[0];
+            document.getElementById('startDateInput').value = startDate.toISOString().split('T')[0];
+            
+            document.getElementById('dateRangeText').innerText = `${days} DIAS`;
+        }
+
+        function applyDateRangeFilter() {
+            const startVal = document.getElementById('startDateInput').value;
+            const endVal = document.getElementById('endDateInput').value;
+
+            if (startVal && endVal) {
+                const s = new Date(startVal);
+                const e = new Date(endVal);
+                const diffTime = Math.abs(e - s);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays > 0) {
+                    document.getElementById('dateRangeText').innerText = `${diffDays} DIAS`;
+                } else {
+                    document.getElementById('dateRangeText').innerText = `1 DIA`;
+                }
+            }
+
+            dateDropdown.classList.add('hidden');
+            if (dateChevron) dateChevron.classList.remove('rotate-180');
+
+            if (activeModuleName === 'Visão Geral') {
+                renderMasterCanvas(`Visão Geral - ${activeVisaoHashtag}`);
+            } else if (activeModuleName === 'Leads e Vendas') {
+                renderMasterCanvas(`Leads e Vendas - ${activeLeadsHashtag}`);
+            } else if (activeModuleName === 'Conversão e Performance') {
+                renderMasterCanvas(`Conversão e Performance - ${activeConversionHashtag}`);
+            } else if (activeModuleName === 'Mídia Paga') {
+                renderMasterCanvas(`Mídia Paga - ${activeMidiaHashtag}`);
+            } else if (activeModuleName === 'Conteúdo e Site') {
+                renderMasterCanvas(`Conteúdo e Site - ${activeConteudoHashtag}`);
+            } else {
+                renderMasterCanvas(activeModuleName);
+            }
         }
 
         function renderMasterCanvas(title) {
             const ctx = document.getElementById('activeMasterCanvas').getContext('2d');
             if (masterChartObj) masterChartObj.destroy();
 
-            const grad = ctx.createLinearGradient(0, 0, 0, 200);
-            grad.addColorStop(0, 'rgba(37, 99, 235, 0.3)');
-            grad.addColorStop(1, 'rgba(37, 99, 235, 0.0)');
+            // Dataset curves
+            let points = [1050, 875, 930, 860, 440, 1080, 640, 1090];
+            if (title.includes('Resumo Executivo')) points = [1050, 875, 930, 860, 440, 1080, 640, 1090];
+            if (title.includes('Principais Indicadores')) points = [720, 810, 890, 940, 980, 1040, 1100, 1180];
+            if (title.includes('Metas')) points = [600, 750, 820, 900, 980, 1050, 1120, 1200];
+            if (title.includes('Resultados')) points = [550, 680, 790, 860, 940, 1020, 1090, 1160];
+            if (title.includes('Comparativo Mensal')) points = [500, 620, 710, 840, 920, 1000, 1090, 1210];
+            if (title.includes('Leads Aceitos')) points = [400, 520, 680, 890, 950, 1020, 1100, 1150];
+            if (title.includes('Leads Qualificados')) points = [900, 950, 880, 1010, 1050, 980, 1120, 1200];
+            if (title.includes('Leads Fechados')) points = [600, 750, 700, 850, 920, 1100, 1050, 1180];
+            if (title.includes('Funil de Vendas')) points = [300, 450, 580, 720, 810, 890, 940, 1020];
+            if (title.includes('Conversões')) points = [620, 710, 830, 790, 920, 980, 1050, 1120];
+            if (title.includes('Taxa de Conversão')) points = [550, 620, 740, 810, 860, 940, 1020, 1080];
+            if (title.includes('Google')) points = [650, 780, 890, 820, 940, 1020, 1080, 1150];
+            if (title.includes('Instagram')) points = [500, 620, 710, 780, 850, 920, 990, 1040];
+            if (title.includes('Facebook')) points = [450, 530, 640, 710, 780, 820, 870, 910];
+            if (title.includes('TikTok')) points = [350, 480, 620, 750, 890, 1010, 1120, 1200];
+            if (title.includes('LinkedIn')) points = [400, 510, 600, 690, 780, 860, 930, 980];
+            if (title.includes('Investimentos')) points = [550, 680, 790, 860, 940, 1010, 1070, 1140];
+            if (title.includes('Publicações')) points = [600, 720, 810, 890, 940, 1020, 1080, 1140];
+            if (title.includes('Tráfego')) points = [700, 820, 880, 950, 1010, 1080, 1130, 1200];
+            if (title.includes('Visitantes')) points = [500, 610, 720, 800, 870, 930, 990, 1050];
+            if (title.includes('Páginas Mais Visitadas')) points = [800, 860, 910, 980, 1040, 1100, 1150, 1220];
+            if (title.includes('Origem do Tráfego')) points = [650, 740, 820, 900, 960, 1020, 1090, 1160];
+            if (title.includes('Engajamento')) points = [400, 520, 680, 810, 920, 1010, 1100, 1180];
 
-            const dataPoints = Array.from({length: 8}, () => Math.floor(Math.random() * 800) + 400);
+            const grad = ctx.createLinearGradient(0, 0, 0, 250);
+            grad.addColorStop(0, 'rgba(59, 130, 246, 0.25)');
+            grad.addColorStop(1, 'rgba(59, 130, 246, 0.01)');
 
             masterChartObj = new Chart(ctx, {
                 type: 'line',
@@ -578,14 +1724,17 @@
                     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago'],
                     datasets: [{
                         label: title,
-                        data: dataPoints,
-                        borderColor: '#2563eb',
-                        borderWidth: 3.5,
+                        data: points,
+                        borderColor: '#3b82f6',
+                        borderWidth: 4,
                         backgroundColor: grad,
                         fill: true,
                         tension: 0.4,
-                        pointRadius: 5,
-                        pointBackgroundColor: '#1d4ed8'
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#3b82f6',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2
                     }]
                 },
                 options: {
@@ -593,52 +1742,41 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#334155', font: { size: 11, weight: 'bold' } } },
-                        y: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#334155', font: { size: 11, weight: 'bold' } } }
+                        x: { grid: { color: 'rgba(226, 232, 240, 0.6)' }, ticks: { color: '#64748b', font: { size: 11, weight: 'bold' } } },
+                        y: { min: 400, max: 1250, grid: { color: 'rgba(226, 232, 240, 0.6)' }, ticks: { color: '#64748b', font: { size: 11, weight: 'bold' }, stepSize: 100 } }
                     }
                 }
             });
         }
 
-        // Report Viewer Controls
-        let modalChartObj = null;
-
+        // Report Viewer Controls (Frosted Glass Modal matching AI Modal)
         function openReportViewer(title) {
-            document.getElementById('viewerTitle').innerText = title;
-            document.getElementById('viewerOverlay').classList.remove('opacity-0', 'pointer-events-none');
+            const titleEl = document.getElementById('viewerTitle');
+            if (titleEl) {
+                titleEl.innerText = `Plataforma de Inteligência • ${title || activeModuleName}`;
+            }
+            const overlay = document.getElementById('viewerOverlay');
             const modal = document.getElementById('viewerModal');
-            modal.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
-
-            const ctx = document.getElementById('modalChartCanvas').getContext('2d');
-            if (modalChartObj) modalChartObj.destroy();
-
-            modalChartObj = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
-                    datasets: [{
-                        label: title,
-                        data: [420, 650, 580, 890],
-                        borderColor: '#2563eb',
-                        borderWidth: 3.5,
-                        backgroundColor: 'rgba(37, 99, 235, 0.15)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
+            if (overlay && modal) {
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+            }
         }
 
         function closeReportViewer() {
-            document.getElementById('viewerOverlay').classList.add('opacity-0', 'pointer-events-none');
+            const overlay = document.getElementById('viewerOverlay');
             const modal = document.getElementById('viewerModal');
-            modal.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+            if (overlay && modal) {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                modal.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+            }
         }
 
-        // Init page
+        // INITIALIZATION WITH STATE PERSISTENCE
         window.addEventListener('DOMContentLoaded', () => {
-            renderMasterCanvas('Visão Geral');
+            const savedModuleName = localStorage.getItem('smartvision_active_module_name') || "Visão Geral";
+            const savedModuleId = parseInt(localStorage.getItem('smartvision_active_module_id')) || 1;
+            loadPaineisModule(savedModuleName, savedModuleId);
         });
     </script>
 </body>
