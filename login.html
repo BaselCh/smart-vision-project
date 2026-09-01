@@ -236,7 +236,14 @@
 
             const alertBox = document.getElementById('errorAlert');
 
-            if (user.toLowerCase() === 'basel' && pass === 'test') {
+            const validUsers = {
+                'basel': 'test',
+                'smartvision': '1234'
+            };
+
+            const normalizedUser = user.toLowerCase();
+
+            if (validUsers[normalizedUser] && validUsers[normalizedUser] === pass) {
                 alertBox.classList.add('hidden');
                 sessionStorage.setItem('smartvision_authenticated', 'true');
                 sessionStorage.setItem('smartvision_user', user);
