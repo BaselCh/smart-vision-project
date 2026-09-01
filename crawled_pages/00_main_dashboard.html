@@ -1,0 +1,2187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link type="text/css" rel="stylesheet" href="../css/style.css?v=1.0">
+<link type="text/css" rel="stylesheet" href="../css/internas.css?v=1.1">
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<!-- DatePicker -->
+<link rel="stylesheet" type="text/css" media="screen" href="../css/calender.css?v=1.0">
+<!-- Ajustes -->
+<link rel="stylesheet" type="text/css" media="screen" href="../css/custom.css?v=1.1">
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<!--<script type="text/javascript" src="/js/datepicker-pt-BR.js"></script>-->
+<!-- DHTMLCombo -->
+<link type="text/css" rel="stylesheet" href="../css/dhtmlxcombo.css?v=1.0">
+<script type="text/javascript" src="../js/dhtmlxcommon.js"></script>
+<script type="text/javascript" src="../js/dhtmlxcombo.js"></script>
+<!-- Menu -->
+<script type="text/javascript" src="../js/animacao-categorias.js"></script>
+<!-- DataTables -->
+<!--<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css?v=1.0" />
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"></script>-->
+    
+<title>Chleba - ADD Intelligence</title>
+
+    <script type="text/javascript" src="https://tableau.addintelligence.com.br/javascripts/api/viz_v1.js"></script>
+
+</head>
+<body><div class="dhx_combo_list " style="width: 250px; display: none;"><div style="width: 100%; overflow: hidden;">ADDSUITE</div><div style="width: 100%; overflow: hidden;">AZ</div><div style="width: 100%; overflow: hidden;">AZ - FLORIPA</div><div style="width: 100%; overflow: hidden;">AZ - GOIANIA</div><div style="width: 100%; overflow: hidden;">AZ - RIO</div><div style="width: 100%; overflow: hidden;">CEC</div><div class="dhx_selected_option" style="width: 100%; overflow: hidden;">CHLEBA</div><div style="width: 100%; overflow: hidden;">CHLEBA GESTÃO</div><div style="width: 100%; overflow: hidden;">COLEGIOEINSTEIN</div><div style="width: 100%; overflow: hidden;">COLEGIOPORTOSEGURO</div><div style="width: 100%; overflow: hidden;">COLEGIORIOBRANCO</div><div style="width: 100%; overflow: hidden;">COLEGIORIOBRANCO – BLUE</div><div style="width: 100%; overflow: hidden;">COLEGIOSANTAMARIA</div><div style="width: 100%; overflow: hidden;">COMERCIAL_E-COMMERCE</div><div style="width: 100%; overflow: hidden;">COMERCIAL ECOMMERCE EN</div><div style="width: 100%; overflow: hidden;">COMERCIAL_LEADS</div><div style="width: 100%; overflow: hidden;">COMERCIAL_SOCIAL</div><div style="width: 100%; overflow: hidden;">COMPETITION</div><div style="width: 100%; overflow: hidden;">COOKIELESS</div><div style="width: 100%; overflow: hidden;">COPAG</div><div style="width: 100%; overflow: hidden;">EBRADI</div><div style="width: 100%; overflow: hidden;">GRUPOJAPAUTO</div><div style="width: 100%; overflow: hidden;">LOOKMESHOP</div><div style="width: 100%; overflow: hidden;">MACKENZIE</div><div style="width: 100%; overflow: hidden;">NEWHUMANS</div><div style="width: 100%; overflow: hidden;">ONFOOD</div><div style="width: 100%; overflow: hidden;">PLAENGE</div><div style="width: 100%; overflow: hidden;">PLAENGE – CAMPINAS</div><div style="width: 100%; overflow: hidden;">PLAENGE – CAMPOGRANDE</div><div style="width: 100%; overflow: hidden;">PLAENGE – CRM</div><div style="width: 100%; overflow: hidden;">PLAENGE – CUIABÁ</div><div style="width: 100%; overflow: hidden;">PLAENGE – CURITIBA</div><div style="width: 100%; overflow: hidden;">PLAENGE – JOINVILLE</div><div style="width: 100%; overflow: hidden;">PLAENGE – LONDRINA</div><div style="width: 100%; overflow: hidden;">PLAENGE – MARINGÁ</div><div style="width: 100%; overflow: hidden;">PLAENGE – PORTO ALEGRE</div><div style="width: 100%; overflow: hidden;">PLAENGE – SANTIAGO</div><div style="width: 100%; overflow: hidden;">PLAENGE – SÃO PAULO</div><div style="width: 100%; overflow: hidden;">PLAENGE – URBANISMO</div><div style="width: 100%; overflow: hidden;">PLAENGE - URBANISMO LONDRINA</div><div style="width: 100%; overflow: hidden;">PLAENGECHILE</div><div style="width: 100%; overflow: hidden;">PLAENGECHILE – SANTIAGO</div><div style="width: 100%; overflow: hidden;">RELATÓRIO RDSTATION</div><div style="width: 100%; overflow: hidden;">SAUDAVELTOBE</div><div style="width: 100%; overflow: hidden;">SEB</div><div style="width: 100%; overflow: hidden;">SEB - BRASILIA</div><div style="width: 100%; overflow: hidden;">SEB - DOM BOSCO</div><div style="width: 100%; overflow: hidden;">SEB - LAFAIETE</div><div style="width: 100%; overflow: hidden;">SEB - MACEIÓ</div><div style="width: 100%; overflow: hidden;">SEB - PORTUGAL</div><div style="width: 100%; overflow: hidden;">SEB - RIBEIRANIA</div><div style="width: 100%; overflow: hidden;">SEB - RIO PRETO</div><div style="width: 100%; overflow: hidden;">SEB - SERRA</div><div style="width: 100%; overflow: hidden;">SEB - UNIMASTER</div><div style="width: 100%; overflow: hidden;">SEB - VILA VELHA</div><div style="width: 100%; overflow: hidden;">SEB - VITORIA</div><div style="width: 100%; overflow: hidden;">TAUARESORTS</div><div style="width: 100%; overflow: hidden;">TRANSCALOR</div><div style="width: 100%; overflow: hidden;">VANGUARD</div><div style="width: 100%; overflow: hidden;">VANGUARD – CAMPINAS</div><div style="width: 100%; overflow: hidden;">VANGUARD – CAMPOGRANDE</div><div style="width: 100%; overflow: hidden;">VANGUARD - CUIABA</div><div style="width: 100%; overflow: hidden;">VANGUARD – CURITIBA</div><div style="width: 100%; overflow: hidden;">VANGUARD – JOINVILLE</div><div style="width: 100%; overflow: hidden;">VANGUARD - LONDRINA</div><div style="width: 100%; overflow: hidden;">VANGUARD - PORTO ALEGRE</div><div style="width: 100%; overflow: hidden;">VANGUARDCHILE</div></div>
+<form method="post" action="./Dashboard.aspx" id="Form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZCfGyoktj0BMQY4uxjVvQJgy4PUd55AgGXT5jvKT_UioUIZaFg2&amp;t=638285957964787378" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=D9drwtSJ4hBA6O8UhT6CQn5vpf0J-K9KEFhWxLbROXFapprwWpwl4d_R8E9N8jAfdYw56R3euTjovHhY9VJ2rztxhObwcHB2L1gEoFP2Gz-shxSb5GHT96yLvH90agkep4cxfLwJYBmk9gGe9Zc6hanK0jU1&amp;t=13798092" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=JnUc-DEDOM5KzzVKtsL1tZFFkt7cuz5dESaqwJwNubAvvNMJ4v-8ts1kPV49-nIjX1dRuuNeOpBqqPeYYOA_VjCUcWt5a7hwC9OrWhUvpZqg6Mi17vvbNrWOQFmZC4XMLPCRMM62TsYJ7mGWqRBDzXYA4bWgvumw3TAGojUZf81Jlqja0&amp;t=13798092" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="B8767291">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="vNEkBxoc5vDcvC6Z1gRNcsRzK3tkKEaJfJbaIOIqsP/M/b/txM6IJvAzZju6ayNM3sEx3O+uN2TU62QuueCzCC+Q6AIQ5AVd7WvoF/SQt/uL19KPyE8E12IYhM8F6TwPqtfXozzDJMEBi/QrL/lCJTYx2fo0EQfxbNqh/jZx3ZgrGedq8Leb9opCMdhSVXalWMlJF2tTV8HyRMwItH1mlKLFN3ZP7L+g+x/5FI2SASlDe8qZwwP67ombNrWmTAp9SrNoQaY8YHZCdiISIsWnIApeIOvkYOjqryTH/gEf6n1oNDTZs1OVcFUyBzlXtdLXNletajmKxzKdGB2Rz78m1E9UcauszHUVUI4CxIyVVrvhutVbyQfojnNA3Q6kfyacuim2lSNn4Fyp/AEKQngVkSRLgnA9C9hxagCUuvOJVm6LqEZEYEBcGvW2tulhfqrJOBFp5ScYrP9LRZoZSQDyFQtBfP1bK6drNmNBi6p4uzL3GE7ohvM0vrzfWdebyT2JLu+kY5FIxEDT62SlHOtOJPwVnG6gPr0wCylFCZ19MNj1mq64/H8Nssi+xBT7SlvuYUhHEBfQhu7UFaAEGbAeV/ialG5fFxoI7vg/fTLB1xiydJ/GGM0uFcqAy3iOL/seBeG5/iLLL5MeUIXBXupAaHi271oet3lrKT2Q8mKqaMRaXgRJmWqsbNz7HIKx/RbXQPU0jMvCqzFOvW+13EZ/0CF+cSnh4mDkTNPaO1psdN3pCtig6BrwFlEU+4YRN7cFWnQoqaQdhY4+nEtab6sxsL5XO71r+f9LI1LD3fJKZvtD3kWXrMxTttjyfUNKHunc7hhtn77G4TYgK88JdEinPJpNUZ9ljubWG7z+YW/XE2pdINRkZRaudnJocBSlVNrJUbnoMGHiRKgLUTwAp1eoeOR+YeU/nRVWMySkCGYhfWzLLTJ60fs7DfMvQFZxgx6ErLly9xXD3mxE9ZP9MTb4Ww9OKged3/MxxC/mr/GFj30EimTAI1cqhef8xPheJ3Og3wJHrn8C2+QOmY/hbA/wmMx+RjpJpvyhlI8iYcHLiWoMlMGBdKSlDybNcBoEXj0Xsfh9wRkIDJSpBCOHaQk38kX1mVaz0eIjxaID/vVaJXEhuZaXoLs56S9Wdqlg2yWzlU3RVl/xstfKQGep2fv8qAqRBAjuszfCFAe68T8JrZdWkOrXinXGvfqvmLCMO/z6vY48GT4NmVDIxnVtMTTS/GIx6Z2qrygjAVNhcCAq6sdgN00egsO5tHBADHK8ZSVkSC+5pwn14ntUeH9l9XOGZhlUYvZOI8oVIqhMjGcoJlXAci3F7jEXChdBuetrjxIj99NtlyeS9s8JUbNSiVCHouoIk9EzM0yrteYPAAMObnTUw8BZzLU7F2qS1l0qsaqPvxNbJaYRdXYbf+iH+0nCMS+Fq/F3/Czk+IrrWCy8N+QhcR9SSSp3il0xXHJpzgzH69+Q0xfCexOpN94dQu1cYgKiedw9zmwasEq2AQzY4M5dBql3ybQE5PAKZHodOJT6yHYi8w+augF8Zm5tcjSNEp2njeT2qxsMpyUoLHppcIe4SNe7iYwVC17iYfsXLZUhNo41xdXY0t5efq2EujJMbLh0HR61/3sw3VDG+MKAwxvqDzPKNYgvxRPgC7f9FOrlwYmm21wa87azWMM4kMr0NIms49zcnjW7wXpDMbE/luN2nblgVXjMvhUSrx/MO6X0FYWjqkPpU8FpCmKzLy6kCUdkGreBSk1N8CYfRd3Mj3272XKsUHMI9DoRC/m00YxseMpwZdAASkITO/SjU5hlHfrFxnukV31mK+F2IbCqf5kiKBvu">
+</div>
+<div id="wrapper">
+  <div class="hiddenBox">
+  <div class="menu-bg"></div>
+  <div class="blackBG"></div>
+    <div id="header">
+      <div class="box1050">
+      	<div class="box1">
+      		<a href="#" class="logo">Chleba - ADD Intelligence</a>
+        </div>
+        <span class="labelCliente">Cliente</span>  
+        <div class="box2 box2Top">            
+            <span><div class="dhx_combo_box " style="width: 250px;"><input autocomplete="off" type="text" class="dhx_combo_input" readonly="" style="width: 231px;"><input type="hidden" name="ctl00$ddlParceiro" value="CHLEBA"><input type="hidden" name="ctl00$ddlParceiro_new_value" value="false"><div class="dhx_combo_img"></div></div></span>
+        </div>
+        <a href="javascript:Menu()" class="btMenu">Menu</a>
+        <p class="txt-menu">Menu</p>
+        <div class="box3" style="overflow-y:scroll;overflow-x:hidden;max-height: 500px;">
+            <a href="javascript:Menu()" class="btFechar">Fechar</a>
+            <ul>
+                <li id="liMenuDashboard" class="first menu1">
+                    <a href="javascript:Submenu()" class="dashboards click">
+                        <div class="icone-lista"></div>
+                        Dashboards
+                    </a>
+                    <ul class="submenu menu-cinza">
+                        <li id="liDashboard" class="first"><a href="../Dashboard/Dashboard.aspx"><div class="box-cinza"></div>Dashboards</a></li>
+                        <li id="liDashboardLog"><a href="../Dashboard/Historico.aspx"><div class="box-cinza"></div>Históricos</a></li>
+                    </ul>
+                </li>
+                <li id="liMenuCubos" class="menu1">
+                    <a href="javascript:Submenu()" class="cubos click">
+                        <div class="icone-lista"></div>
+                        Cubos de dados
+                    </a>
+                    <ul class="submenu menu-cinza">
+                        <li id="liDownloadCubos" class="first"><a href="../CuboDados/DownloadCubos.aspx"><div class="box-cinza"></div>Download de cubos de dados</a></li>
+                        <!--<li id="liProcessaCubos"><a href="../CuboDados/ProcessaCubo.aspx"><div class="box-cinza"></div>Gerar cubo de dados</a></li>-->
+                    </ul>
+                </li>
+                <li id="liMenuConfiguracoes" class="menu1">
+                    <a href="javascript:Submenu()" class="configuracoes click">
+                        <div class="icone-lista"></div>
+                        Configurações
+                    </a>
+                    <ul class="submenu menu-cinza">
+                        <li id="liSubMenuConfigManual" class="first config-manual select menu2">
+                            <a href="javascript:Submenu()" class="click"><div class="box-cinza"></div>Configurações Manuais</a>
+                            <ul class="submenu menu-branco ">
+                                <li id="liTagueamento" class="first"><a href="../ConfiguracaoManual/Tagueamento.aspx"><div class="box-cinza"></div>Tagueamento campanhas</a></li>
+                                <li id="liUploadDados"><a href="../ConfiguracaoManual/DadosVeiculacao.aspx"><div class="box-cinza"></div>Upload dados veiculação</a></li>
+                                
+                                <li id="ComissaoAfiliadosLeads"><a href="../ConfiguracaoManual/ComissaoAfiliadosLeads.aspx"><div class="box-cinza"></div>Comissão de afiliados - leads</a></li>
+                                
+                                <li id="liQualificarLeads"><a href="../ConfiguracaoManual/QualificarLeads.aspx"><div class="box-cinza"></div>Qualificar leads</a></li>
+                                <li id="liHistoricoDashboars"><a href="../ConfiguracaoManual/GerenciarDashboard.aspx"><div class="box-cinza"></div>Histórico dashboards</a></li>
+                                <li id="liLogManual"><a href="../ConfiguracaoManual/GerenciarLog.aspx"><div class="box-cinza"></div>Log de configurações manuais</a></li>
+                                
+                                
+                                <li id="liDadosMetas"><a href="../ConfiguracaoManual/DadosMetas.aspx"><div class="box-cinza"></div>Gestão de Metas</a></li>
+								
+								<li id="liMetaGeral"><a href="../ConfiguracaoManual/GestaoMetaGeral.aspx"><div class="box-cinza"></div>Gestão de Meta Geral</a></li>
+								<li id="liMetaEspecifica"><a href="../ConfiguracaoManual/GestaoMetaEspecifica.aspx"><div class="box-cinza"></div>Gestão de Meta Específica</a></li>
+								<li id="liDescricaoImagens"><a href="../ConfiguracaoManual/DescricaoImagens.aspx"><div class="box-cinza"></div>Descrição de Imagens IA</a></li>
+                            </ul>
+                        </li>
+                        
+                        
+                        
+                        <!--<li class="atimizacao"><a href=""><div class="box-cinza"></div>Otimização Dinâmica</a></li>-->
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="../Logout/Logout.aspx" class="sair">
+                        <div class="icone-lista"></div>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+      </div>
+    </div><!--/header-->
+    
+  <div id="content">
+      
+    
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$main$ScriptManager1', 'Form1', ['tctl00$main$UpdatePanel1','main_UpdatePanel1'], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+	<input type="hidden" name="ctl00$main$parceiroSlug" id="main_parceiroSlug" value="chleba">
+    <div id="main">
+        <div class="box1050">
+
+            <div class="breadcrumb">
+                <ul>
+                    <li class="first"><a href="#" title="Dashboard">Dashboard</a></li>
+                    <li class="act">Dashboard</li>
+                </ul>
+            </div>
+            <div id="main_UpdatePanel1">
+	
+                    <h2 class="titulo">Plataforma de Inteligência de Vendas
+                    
+                    </h2>
+                    <div id="main_pnlGrafico">
+		
+                        
+                                <div class="box_relatorios">
+                                    <ul class="box-01">
+
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_0" siteroot="" grafico="AnaliseGeral_1/VisoGeral" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl01$lkbGrafico','')">Visão Geral</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_1" siteroot="" grafico="AnlisedeLeads/AnlisedeLeads" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl02$lkbGrafico','')">Leads Recebidos</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_2" siteroot="" grafico="AnlisedeConverses_0/AnlisedeLeads" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl03$lkbGrafico','')">Conversões</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_3" siteroot="" grafico="AnlisedeSAL/AnlisedeSAL" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl04$lkbGrafico','')">Sales Accepted Leads</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_4" siteroot="" grafico="AnlisedeSQL/AnlisedeSAL" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl05$lkbGrafico','')">Sales Qualified Leads</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_5" siteroot="" grafico="AnlisedeSCL/AnlisedeSAL" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl06$lkbGrafico','')">Sales Closed Leads</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_6" siteroot="" grafico="AnlisedeSearch_0/AnlisedeSearch" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl07$lkbGrafico','')">Google Ads</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_7" siteroot="" grafico="AnlisedeFacebook_1/AnlisedeFacebook" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl08$lkbGrafico','')">Meta Ads</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_8" siteroot="" grafico="LinkedIn/LinkedIn" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl09$lkbGrafico','')">Linkedin Ads</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_9" siteroot="" grafico="AnlisedeTaxadeConverso_1/AnlisedeTaxadeConverso" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl10$lkbGrafico','')">Taxa de Conversão</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_10" siteroot="" grafico="BlogPosts_0/BlogPosts" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl11$lkbGrafico','')">Blog Posts</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_11" siteroot="" grafico="AnlisedeInvetimento/AnlisedeInvestimento" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl12$lkbGrafico','')">Investimentos</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                <li>						
+                                    <a id="main_rptDashboard_lkbGrafico_12" siteroot="" grafico="AnlisedeFunildeVendas/AnlisedeFunildeVendas" href="javascript:__doPostBack('ctl00$main$rptDashboard$ctl13$lkbGrafico','')">Funil de Vendas</a>
+										
+										
+									
+									
+									
+										
+										
+										
+									
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+									
+										
+										
+										
+										
+									
+										
+										
+										
+									
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+									
+									
+									
+								</li>
+                            
+                                </ul>
+                                </div>
+                            
+                    
+	</div>
+					
+                    
+					
+                    <div id="main_updateProgress" style="display:none;" role="status" aria-hidden="true">
+		
+                            <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 0.7;">
+                                <img id="main_imgUpdateProgress" title="Carregando ..." src="../imagens/layout/loading.gif" alt="Carregando ..." style="padding: 10px; position: fixed; top: 45%; left: 50%;">
+                            </div>
+                        
+	</div>
+                
+</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+	<style>
+		#main .box1050 .box_relatorios ul.box-01 li {
+			column-gap:2px;
+		}
+		
+		#main .box1050 .box_relatorios ul.box-01 li a.gpt {
+			background-color:#505050;
+		}
+		
+		#main .box1050 .box_relatorios ul.box-01 li a {
+			padding: 12px;
+			box-sizing:border-box;
+		}
+		
+		.d-none {
+			display:none;
+		}
+	</style>
+    <!--/main-->
+
+  </div><!--/content-->
+  </div><!--/hidden-->
+	<div id="footer">
+	  <div class="box1050 footer-line">
+
+		<a href="https://selos.sitedefender.com.br/Chleba-painel.addintelligence.com.br" target="_blank" rel="noopener noreferrer" class="selo">
+		  <img src="https://selos-site-defender.s3.amazonaws.com/selo-Chleba-painel.addintelligence.com.br.png" alt="Site Defender">
+		</a>
+
+		<p class="texto1">
+		  ©2026 - Todos os direitos reservados · Criação e Desenvolvimento
+		</p>
+
+		<div class="logos-footer">
+		  <a href="https://addsuite.com.br/" title="Add Suite" class="logo logo-1" target="_blank"></a>
+		  <a href="https://www.newhumans.com.br/" title="Agência New Humans" class="logo logo-2" target="_blank"></a>
+		</div>
+
+	  </div>
+	</div>
+</div><!--/wrapper-->
+
+
+<script type="text/javascript">
+    var z = new dhtmlXCombo("ddlParceiro", "submenu", 100);
+    z.readonly(true);
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":null,"displayAfter":500,"dynamicLayout":true}, null, null, $get("main_updateProgress"));
+});
+//]]>
+</script>
+</form>
+
+
+</body></html>

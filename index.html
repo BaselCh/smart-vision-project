@@ -33,127 +33,217 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body {
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #e2e8f0;
-            color: #0f172a;
+            overflow: hidden;
         }
 
-        /* Gradient Button Matching SMARTVISION Logo */
-        .btn-gradient {
-            background: linear-gradient(90deg, #ec4899 0%, #7c3aed 50%, #0066ff 100%);
+        /* ---------------------------------------------------- */
+        /* AUTOMATIC BACKGROUND SLIDESHOW (5 IMAGES)            */
+        /* ---------------------------------------------------- */
+        .bg-slider-container {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center right;
+            opacity: 0;
+            transform: scale(1);
+            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), transform 7s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .bg-slide.active {
+            opacity: 1;
+            transform: scale(1.04);
+        }
+
+        .bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 25% 50%, rgba(255, 255, 255, 0.2) 0%, rgba(15, 23, 42, 0.15) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ---------------------------------------------------- */
+        /* ENLARGED WHITE GLASS CARD (+20% LARGER)              */
+        /* ---------------------------------------------------- */
+        .login-glass-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 2rem;
+            box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.16), 0 12px 30px -6px rgba(0, 0, 0, 0.09);
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
             transition: all 0.3s ease;
         }
-        .btn-gradient:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
-            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.4);
+
+        /* ---------------------------------------------------- */
+        /* CUSTOM BUTTON (NO SHADOWS AT ALL IN NORMAL OR HOVER)*/
+        /* ---------------------------------------------------- */
+        .custom-enviar-btn {
+            background-image: url('assets/button/button%20bg.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #ffffff;
+            border-radius: 0.95rem;
+            font-weight: 800;
+            font-size: 1.05rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: none !important; /* NO SHADOW */
+            border: none;
+            cursor: pointer;
         }
 
-        .login-card {
+        .custom-enviar-btn:hover {
+            background-image: url('assets/button/button%20bg%20hover.png');
+            transform: translateY(-1px);
+            box-shadow: none !important; /* NO SHADOW ON HOVER */
+        }
+
+        .custom-input {
             background: #ffffff;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
-            border-radius: 1.5rem;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .custom-input:focus {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+            outline: none;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="relative min-h-screen flex items-center justify-center sm:justify-start p-6 sm:p-12 lg:pl-48 xl:pl-64 lg:pr-12">
 
-    <!-- MAIN CENTERED LOGIN CONTAINER -->
-    <main class="w-full max-w-xl">
-        <div class="login-card p-8 sm:p-12 border border-slate-200 text-center">
+    <!-- 1. AUTOMATIC BACKGROUND SLIDESHOW -->
+    <div class="bg-slider-container">
+        <div class="bg-slide active" style="background-image: url('assets/bg/bg_1.png');"></div>
+        <div class="bg-slide" style="background-image: url('assets/bg/bg_2.png');"></div>
+        <div class="bg-slide" style="background-image: url('assets/bg/bg_3.png');"></div>
+        <div class="bg-slide" style="background-image: url('assets/bg/bg_4.png');"></div>
+        <div class="bg-slide" style="background-image: url('assets/bg/bg_5.png');"></div>
+        <div class="bg-overlay"></div>
+    </div>
+
+    <!-- 2. BALANCED LEFT-ALIGNED LOGIN GLASS CONTAINER (+20% LARGER CARD) -->
+    <main class="relative z-10 w-full max-w-xl xl:max-w-2xl">
+        <div class="login-glass-card p-9 sm:p-12 text-center">
             
-            <!-- SMARTVISION LOGO & MARK -->
-            <div class="flex flex-col items-center justify-center mb-6">
-                <img src="assets/smartvision_logo_horizontal.png" alt="SMARTVISION" class="h-16 w-auto object-contain mb-2">
+            <!-- VIDEO REVEAL LOGO (ENLARGED) -->
+            <div class="flex flex-col items-center justify-center mb-5 overflow-hidden min-h-[140px]">
+                <video id="logoVideo" autoplay muted playsinline class="h-36 sm:h-44 lg:h-48 w-auto object-contain mx-auto">
+                    <source src="assets/logo.mp4" type="video/mp4">
+                    <img src="assets/smartvision_logo_horizontal.png" alt="SMARTVISION" class="h-28 w-auto object-contain">
+                </video>
             </div>
 
-            <!-- SUBTITLE -->
-            <p class="text-xs sm:text-sm font-bold text-slate-600 mb-8">
+            <!-- SUBTITLE TEXT -->
+            <p class="text-sm sm:text-base font-semibold text-slate-600 mb-7 px-2 leading-relaxed">
                 Olá, Faça o login de acesso à plataforma Add Intelligence.
             </p>
 
             <!-- ERROR ALERT -->
-            <div id="errorAlert" class="hidden mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-black flex items-center justify-center gap-2">
+            <div id="errorAlert" class="hidden mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm font-bold flex items-center justify-center gap-2">
                 <i data-lucide="alert-circle" class="w-4 h-4 text-rose-600"></i>
-                <span id="errorMessage">Usuário, senha ou empresa inválidos.</span>
+                <span id="errorMessage">Usuário ou senha inválidos.</span>
             </div>
 
-            <!-- LOGIN FORM -->
+            <!-- FORM FIELDS (+20% ENLARGED INPUTS) -->
             <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-5 text-left max-w-md mx-auto">
                 
-                <!-- 1. Login (Username) -->
+                <!-- Login (Username) -->
                 <div>
-                    <label for="usernameInput" class="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1.5">Login</label>
-                    <input type="text" id="usernameInput" required placeholder="Digite seu usuário (ex: basel)" class="w-full px-4 py-3 rounded-xl bg-white border-2 border-slate-200 text-sm font-bold text-slate-900 focus:outline-none focus:border-blue-600 transition-colors">
+                    <label for="usernameInput" class="block text-xs font-extrabold text-slate-700 mb-1.5">Login</label>
+                    <input type="text" id="usernameInput" required placeholder="" class="w-full px-4 py-3 sm:py-3.5 custom-input text-base font-bold text-slate-900">
                 </div>
 
-                <!-- 2. Senha (Password) -->
+                <!-- Senha (Password) -->
                 <div>
-                    <label for="passwordInput" class="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1.5">Senha</label>
-                    <input type="password" id="passwordInput" required placeholder="Digite sua senha" class="w-full px-4 py-3 rounded-xl bg-white border-2 border-slate-200 text-sm font-bold text-slate-900 focus:outline-none focus:border-blue-600 transition-colors">
+                    <label for="passwordInput" class="block text-xs font-extrabold text-slate-600 mb-1.5">Senha</label>
+                    <input type="password" id="passwordInput" required placeholder="" class="w-full px-4 py-3 sm:py-3.5 custom-input text-base font-bold text-slate-900">
                 </div>
 
-                <!-- 3. Empresa (Company) -->
-                <div>
-                    <label for="companyInput" class="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1.5">Empresa</label>
-                    <input type="text" id="companyInput" required placeholder="Digite sua empresa" class="w-full px-4 py-3 rounded-xl bg-white border-2 border-slate-200 text-sm font-bold text-slate-900 focus:outline-none focus:border-blue-600 transition-colors">
-                </div>
-
-                <!-- SUBMIT BUTTON (Enviar) -->
+                <!-- BUTTON ENVIAR (NO SHADOWS) -->
                 <div class="pt-3">
-                    <button type="submit" class="w-full btn-gradient py-3.5 rounded-xl text-white font-black text-sm tracking-wider uppercase shadow-lg flex items-center justify-center gap-2">
+                    <button type="submit" class="w-full custom-enviar-btn py-3.5 sm:py-4 flex items-center justify-center gap-2">
                         <span>Enviar</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
                 </div>
             </form>
 
             <!-- FOOTER BADGES & COPYRIGHT -->
-            <div class="mt-12 pt-6 border-t border-slate-200 flex flex-col items-center gap-4">
-                <div class="flex items-center justify-center gap-6 text-xs font-black text-slate-700">
-                    <span class="flex items-center gap-1.5">
-                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> Site Defender
-                    </span>
-                    <span>•</span>
-                    <span class="text-purple-700">new humans</span>
-                    <span>•</span>
-                    <span class="text-blue-700">Addsuite</span>
+            <div class="mt-10 pt-6 border-t border-slate-200/80 flex flex-col items-center gap-3.5">
+                <div class="flex items-center justify-center gap-7">
+                    <!-- SITE DEFENDER SELO LOGO -->
+                    <img src="assets/site_defender_selo.png" alt="Site Defender" class="h-7 sm:h-8 w-auto object-contain">
+                    
+                    <!-- NEW HUMANS GROUP 6 LOGO -->
+                    <img src="assets/new_humans_group6.png" alt="new humans" class="h-7 sm:h-8 w-auto object-contain">
                 </div>
-                <p class="text-[10px] font-bold text-slate-400">
-                    Copyright © 2026 Add Intelligence - Todos os direitos reservados.
+                
+                <!-- COPYRIGHT TEXT -->
+                <p class="text-xs font-bold text-slate-500">
+                    Copyright © 2026 Smart vision - Todos os direitos reservados.
                 </p>
             </div>
 
         </div>
     </main>
 
-    <!-- LOGIN SCRIPT -->
+    <!-- JAVASCRIPT -->
     <script>
         lucide.createIcons();
 
+        // Video freeze on last frame
+        const logoVid = document.getElementById('logoVideo');
+        if (logoVid) {
+            logoVid.addEventListener('ended', function() {
+                logoVid.pause();
+            });
+        }
+
+        // Automatic Background Slideshow
+        const slides = document.querySelectorAll('.bg-slide');
+        let currentSlide = 0;
+        const slideIntervalTime = 5500;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, slideIntervalTime);
+
+        // Login Handler
         function handleLogin(event) {
             event.preventDefault();
             
             const user = document.getElementById('usernameInput').value.trim();
             const pass = document.getElementById('passwordInput').value.trim();
-            const comp = document.getElementById('companyInput').value.trim();
 
             const alertBox = document.getElementById('errorAlert');
 
-            // Credential Check: Username = basel, Password = test, Company = test
-            if (user === 'basel' && pass === 'test' && comp === 'test') {
+            if (user.toLowerCase() === 'basel' && pass === 'test') {
                 alertBox.classList.add('hidden');
-                // Store auth token in sessionStorage
                 sessionStorage.setItem('smartvision_authenticated', 'true');
                 sessionStorage.setItem('smartvision_user', user);
-                sessionStorage.setItem('smartvision_company', comp);
-                
-                // Redirect immediately to dashboard
                 window.location.href = 'dashboard.html';
             } else {
                 alertBox.classList.remove('hidden');
-                document.getElementById('errorMessage').innerText = 'Credenciais inválidas. Verifique Login, Senha e Empresa.';
+                document.getElementById('errorMessage').innerText = 'Credenciais inválidas. Verifique Login e Senha.';
             }
         }
     </script>
